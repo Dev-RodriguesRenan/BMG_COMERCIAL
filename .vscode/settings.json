@@ -1,0 +1,12 @@
+{
+    // Define o interpretador Python do ambiente virtual
+    "robot.python.executable": "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python.exe",
+    // Define as variáveis de ambiente, se necessário
+    "robot.python.env": {
+        "PYTHONPATH": "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Lib/site-packages"
+    },
+    // Configura o formatador padrão para arquivos do Robot Framework
+    "[robotframework]": {
+        "editor.defaultFormatter": "robocorp.robotframework-lsp"
+    }
+}
