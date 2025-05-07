@@ -59,6 +59,6 @@ Export XLSX in Transferencia de Carne
     Wait Until Screen Contain    excel_opened.png    120
     Click    excel_opened.png
     Sleep    5s
-    Save XLSX    $nome_arquivo
+    Save XLSX    ${nome_arquivo}
     Close FJ Frigo
 
