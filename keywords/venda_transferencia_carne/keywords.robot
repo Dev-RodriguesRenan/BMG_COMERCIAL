@@ -17,18 +17,20 @@ Select Menu Transferencia de Carne
     # Clica em venda transferencia de carne
     Wait Until Screen Contain    vtdc_icon.png    30
     Click    vtdc_icon.png
-    
+    Sleep    3s
 Fill Forms in Transferencia de Carne
-    ${DATA_INICIAL}    Take Last Business Day 
+    ${DATA_INICIAL}    Take Last Business Day
+    Log    ${DATA_INICIAL} 
     ${DATA_FINAL}    Take Last Business Day
+    Log    ${DATA_FINAL} 
     # Preenche o campo de data inicial
     With Keys Write Text    ${DATA_INICIAL}
     # Passa para o campo
-    Press Special Key    TAB
+    Sleep    1s
     # Preenche o campo de data final
     With Keys Write Text    ${DATA_FINAL}
     # Passa para o proximo campo
-    FOR    ${counter}    IN RANGE    0    16    1
+    FOR    ${counter}    IN RANGE    0    17    1
         Log    Press TAB ${counter}
         Press Special Key    TAB
     END
@@ -38,7 +40,7 @@ Fill Forms in Transferencia de Carne
     With Keys Write Text    -1
     Press Enter
     # Passa para o proximo campo
-    FOR    ${counter}    IN RANGE    0    3    1
+    FOR    ${counter}    IN RANGE    0    1    1
         Log    Press TAB ${counter}
         Press Special Key    TAB
     END
@@ -49,6 +51,7 @@ Fill Forms in Transferencia de Carne
     Press Enter
 
 Export XLSX in Transferencia de Carne
+    ${nome_arquivo}  Get Name File 
     # Clica no botao de exportar
     Wait Until Screen Contain    export_xls.png    30
     Click    export_xls.png

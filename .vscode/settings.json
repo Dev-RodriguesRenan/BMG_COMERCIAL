@@ -8,5 +8,10 @@
     // Configura o formatador padrão para arquivos do Robot Framework
     "[robotframework]": {
         "editor.defaultFormatter": "robocorp.robotframework-lsp"
+    },
+    "files.exclude": {
+        "**/Sikuli_*": true,
+        "**/sikuliximage*": true,
+        "**/__pycache__": true,
     }
 }

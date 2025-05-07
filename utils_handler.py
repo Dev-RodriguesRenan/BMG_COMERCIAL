@@ -13,3 +13,8 @@ def take_last_business_day():
     else:
         util_day = datetime.datetime.now() - datetime.timedelta(days=3)
     return util_day.strftime("%d%m%Y")
+
+
+def get_name_file():
+    curent_date = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+    return f"RelatorioVendaTransferencia_{curent_date}_consolidado"

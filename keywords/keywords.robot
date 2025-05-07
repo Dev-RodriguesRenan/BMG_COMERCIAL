@@ -9,6 +9,7 @@ Resource        share.robot
 Login in FJ Frigo
     [Arguments]    ${base}
     Press Key    win
+    Sleep    2s
     With Keys Write Text    fjfrigo
     Sleep    2s 
     Press Enter
@@ -20,17 +21,35 @@ Login in FJ Frigo
 Select Base in FJ Frigo
     [Arguments]    ${base}
     Click    banco_de_dados.png    91    08
-    With Keys Write Text    ${base}
+    Sleep    2s   
+    IF    '${base}' == 'BMG Central'
+        Select Primary Option
+        Select Option   1
+    ELSE IF    '${base}' == 'Central Nostrobeef'
+        Select Primary Option
+        Select Option    3
+    ELSE IF    '${base}' == 'BMG FOUR FRIGO'
+        Select Primary Option
+        Select Option    1
+    ELSE IF    '${base}' == 'BMG VILA BELA'
+        Select Primary Option
+        Select Option    1
+    ELSE
+       Log    Escolhendo a base default: BMG Central
+    END
     Press Enter
     Press Special Key    TAB
 Fill Credentials in FJ Frigo
     Press Special Key    TAB
-    ${is_loged}=    Wait Until Screen Contain    login.png    5
+    ${is_loged}=    Exists    login.png    5
     IF    '${is_loged}' == 'False'
         With Keys Write Text    ${LOGIN}
     END
     Press Special Key    TAB
-    With Keys Write Text    ${PASSWORD}
+    ${is_loged}=    Exists    password.png    5
+    IF    '${is_loged}' == 'False'
+        With Keys Write Text    ${PASSWORD}
+    END
     Press Enter
     Press Enter
 # Salva o arquivo XLSX
@@ -55,3 +74,16 @@ Close FJ Frigo
     Switch Window FjFrigo 
     Sleep    5s
     Alt F4
+
+Select Primary Option
+    FOR    ${counter}    IN RANGE    0    6    1
+        Log    ${counter}
+        Press Key    up
+    END
+
+Select Option
+    [Arguments]    ${option}
+    FOR    ${counter}    IN RANGE    0    ${option}    1
+        Log    ${counter}
+        Press Key    down
+    END
