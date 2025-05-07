@@ -12,4 +12,4 @@ def take_last_business_day():
         util_day = datetime.datetime.now() - datetime.timedelta(days=1)
     else:
         util_day = datetime.datetime.now() - datetime.timedelta(days=3)
-    return util_day.strftime("%d-%m-%Y")
+    return util_day.strftime("%d%m%Y")

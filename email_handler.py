@@ -1,13 +1,15 @@
-from email import encoders
-import os
+import time
 import smtplib
+from email import encoders
+from creads import email_credentials
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-import time
 
 
-def send_email(subject, body, to_email, from_email, attachments=None):
+def send_email(
+    subject, body, to_email, from_email=email_credentials["user"], attachments=None
+):
     """Sends an email with the given subject, body, and recipient email address.
 
     Args:
@@ -31,7 +33,7 @@ def send_email(subject, body, to_email, from_email, attachments=None):
 
     with smtplib.SMTP("smtp.gmail.com", 587) as server:
         server.starttls()
-        server.login(from_email, os.gentenv("EMAIL_PASSWORD"))
+        server.login(from_email, email_credentials["password"])
         server.sendmail(from_email, to_email, message.as_string())
         print(f'{time.strftime("%X")}>>> Email sent sucessfully!!')
 

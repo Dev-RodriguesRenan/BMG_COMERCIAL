@@ -1,12 +1,57 @@
 *** Settings ***
-Library           SikuliLibrary
-Resource         keywords.robot
+Library         SikuliLibrary
+Library         keywords.py
+Resource        keywords.robot
+Resource        share.robot
 
 *** Keywords ***
 # Acessa o sistema da FJ Frigo 
+Login in FJ Frigo
+    [Arguments]    ${base}
+    Press Key    win
+    With Keys Write Text    fjfrigo
+    Sleep    2s 
+    Press Enter
+    Wait Until Screen Contain    fj_banner.png    60
     # Seleciona a base da FJ Frigo
-    # Faz o login 
+    Select Base in FJ Frigo    ${base}
+    # Preenche o login e senha
+    Fill Credentials in FJ Frigo 
+Select Base in FJ Frigo
+    [Arguments]    ${base}
+    Click    banco_de_dados.png    91    08
+    With Keys Write Text    ${base}
+    Press Enter
+    Press Special Key    TAB
+Fill Credentials in FJ Frigo
+    Press Special Key    TAB
+    ${is_loged}=    Wait Until Screen Contain    login.png    5
+    IF    '${is_loged}' == 'False'
+        With Keys Write Text    ${LOGIN}
+    END
+    Press Special Key    TAB
+    With Keys Write Text    ${PASSWORD}
+    Press Enter
+    Press Enter
+# Salva o arquivo XLSX
+Save XLSX
+    [Arguments]    ${nome_arquivo}
+    # Verifica se o excel abriu
+    Wait Until Screen Contain    excel_is_opened.png    120
+    # Atalho para salvar o arquivo
+    Press Keys Simultaneously    ctrl    b
+    # Salvar na pasta documents
+    Wait Until Screen Contain    procurar_icon.png    30
+    Click    procurar_icon.png
+    Wait Until Screen Contain    excel_is_save.png    120
+    With Keys Write Text    ${nome_arquivo}
+    Sleep    2s
+    Press Enter
+    Wait Until Screen Contain    excel_is_opened.png    10
+    Alt F4
 
-    
 # Fecha o sistema da FJ Frigo
-   
+Close FJ Frigo
+    Switch Window FjFrigo 
+    Sleep    5s
+    Alt F4
