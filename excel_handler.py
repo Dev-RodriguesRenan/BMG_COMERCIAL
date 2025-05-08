@@ -2,6 +2,7 @@ import os
 import shutil
 import pandas as pd
 from pathlib import Path
+from email_handler import send_email, email_credentials
 
 # Definindo o caminho base para os documentos
 BASE_DOCUMENTS = Path("C:\\Users\\PCVJ\\Documents")
@@ -88,15 +89,45 @@ def get_dataframe_filtered(file_path_dataframe: str, df_name: str):
 
 def main():
     try:
+        # gerar o arquivo consolidado de vendas
         filename = merge_excel_files(BASE_VENDAS_TRANSFERENCIA)
-        print(f"Arquivo consolidado de vendas criado: {filename}")
-        # enviar arquivo para o e-mail
+        if filename:
+            print(
+                f"Arquivo consolidado de Relatório de Vendas/Transferências criado: {filename}"
+            )
+            # enviar arquivo para o e-mail
+            send_email(
+                subject="Relatório de Vendas/Transferências Consolidado",
+                body=f"<h1>Segue o anexo do arquivo consolidado do Relatório de Vendas/Transferências gerado: <b>{filename}</b></h1>",
+                to_email=email_credentials["receiver"],
+                attachments=filename,
+            )
+        # gerar o arquivo consolidado de carnes
         filename = merge_excel_files(BASE_CARNES)
-        print(f"Arquivo consolidado de carnes criado: {filename}")
-        # enviar arquivo para o e-mail
+        if filename:
+            print(
+                f"Arquivo consolidado de Relatório de Compra de Carne criado: {filename}"
+            )
+            # enviar arquivo para o e-mail
+            send_email(
+                subject="Relatório de Compra de Carne Consolidado",
+                body=f"<h1>Segue o anexo do arquivo consolidado de Relatório de Compra de Carne gerado: <b>{filename}</b></h1>",
+                to_email=email_credentials["receiver"],
+                attachments=filename,
+            )
+        # gerar o arquivo consolidado de inventario
         filename = merge_excel_files(BASE_INVENTARIO_INDUSTRIA)
-        print(f"Arquivo consolidado de inventario criado: {filename}")
-        # enviar arquivo para o e-mail
+        if filename:
+            print(
+                f"Arquivo consolidado de Relatório de Inventário Indústria criado: {filename}"
+            )
+            # enviar arquivo para o e-mail
+            send_email(
+                subject="Relatório de Inventário Indústria Consolidadas",
+                body=f"<h1>Segue o anexo do arquivo consolidado de Relatório de Inventário Indústria gerado: <b>{filename}</b></h1>",
+                to_email=email_credentials["receiver"],
+                attachments=filename,
+            )
     except Exception as e:
         print(f"Erro ao processar os arquivos: {e}")
 

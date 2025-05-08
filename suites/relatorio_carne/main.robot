@@ -3,7 +3,7 @@ Resource        ../../keywords/relatorio_carne/keywords.robot
 Test Setup        Load Images
 
 *** Variables ***
-${base}    BMG Central
+${base}    BMG VILA BELA
 
 *** Test Cases ***
 Relatorio de Carne

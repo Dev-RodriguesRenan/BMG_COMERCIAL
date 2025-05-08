@@ -58,3 +58,4 @@ Export XLSX in Relatorio de Carne
     Click    excel_opened.png
     Sleep    5s
     Save XLSX    ${nome_arquivo}
+    Close FJ Frigo

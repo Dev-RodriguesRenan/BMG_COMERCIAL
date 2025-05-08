@@ -6,4 +6,5 @@ load_dotenv()
 email_credentials = {
     'user':os.getenv("EMAIL_USER"),
     'password':os.getenv("EMAIL_PASSWORD"),
+    'receiver':os.getenv("EMAIL_RECEIVER"),
 }

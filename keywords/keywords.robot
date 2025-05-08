@@ -16,6 +16,7 @@ Login in FJ Frigo
     Wait Until Screen Contain    fj_banner.png    60
     # Seleciona a base da FJ Frigo
     Select Base in FJ Frigo    ${base}
+    Sleep    3s
     # Preenche o login e senha
     Fill Credentials in FJ Frigo 
 Select Base in FJ Frigo
@@ -41,13 +42,16 @@ Select Base in FJ Frigo
     Press Special Key    TAB
 Fill Credentials in FJ Frigo
     Press Special Key    TAB
+    # verifica se o login e senha estão preenchidos
     ${is_loged}=    Exists    login.png    5
     IF    '${is_loged}' == 'False'
         With Keys Write Text    ${LOGIN}
+        Log    Preechendo login do usuario: ${LOGIN}
     END
     Press Special Key    TAB
     ${is_loged}=    Exists    password.png    5
     IF    '${is_loged}' == 'False'
+        Log    Preechendo senha do usuario: ${PASSWORD}
         With Keys Write Text    ${PASSWORD}
     END
     Press Enter
@@ -85,6 +89,7 @@ Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
         Log    ${counter}
+        Sleep    0.5s
         Press Key    down
     END
 # Procura o icone até que o mesmo seja encontrado
