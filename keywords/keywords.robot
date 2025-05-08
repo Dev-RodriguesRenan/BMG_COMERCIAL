@@ -89,7 +89,7 @@ Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
         Log    ${counter}
-        Sleep    0.5s
+        Sleep    1s
         Press Key    down
     END
 # Procura o icone até que o mesmo seja encontrado
