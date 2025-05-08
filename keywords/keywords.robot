@@ -87,3 +87,15 @@ Select Option
         Log    ${counter}
         Press Key    down
     END
+
+Procurar Icone
+    [Arguments]    ${icon}
+    ${isCancel}    Exists    ${icon}.png    10
+    WHILE    ${isCancel} == 'True'
+        ${isCancel}    Exists    ${icon}.png    10
+        IF    ${isCancel} == 'False'
+            Log    ${icon} encontrado
+            BREAK
+        END
+        Log    ${icon} não encontrado
+    END

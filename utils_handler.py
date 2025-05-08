@@ -15,6 +15,19 @@ def take_last_business_day():
     return util_day.strftime("%d%m%Y")
 
 
-def get_name_file():
+def get_name_file(action):
     curent_date = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-    return f"RelatorioVendaTransferencia_{curent_date}_consolidado"
+    return f"Relatorio{action}_{curent_date}_consolidado"
+
+
+def get_name_file_of_unit(action, unit):
+    curent_date = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+    return f"Relatorio{action}_{curent_date}_{unit}"
+
+
+def get_datetime_now():
+    return datetime.datetime.now().strftime("%d%m%Y")
+
+
+def get_first_day_of_month():
+    return datetime.datetime.now().replace(day=1).strftime("%d%m%Y")

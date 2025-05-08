@@ -1,5 +1,3 @@
-import datetime
-import time
 import pyautogui
 import pywinauto
 

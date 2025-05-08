@@ -51,11 +51,13 @@ Fill Forms in Transferencia de Carne
     Press Enter
 
 Export XLSX in Transferencia de Carne
-    ${nome_arquivo}  Get Name File 
+    [Arguments]    ${unit}
+    ${nome_arquivo}  Get Name File Of Unit    VendaTransferencia    ${unit}
     # Clica no botao de exportar
     Wait Until Screen Contain    export_xls.png    30
     Click    export_xls.png
-    # Clica no botao de ok
+    # Clica no icone do excel
+    Procurar Icone    excel_opened.png
     Wait Until Screen Contain    excel_opened.png    120
     Click    excel_opened.png
     Sleep    5s

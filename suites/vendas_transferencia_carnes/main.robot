@@ -1,5 +1,4 @@
 *** Settings ***
-Library         SikuliLibrary
 Resource        ../keywords/venda_transferencia_carne/keywords.robot
 Test Setup        Load Images
 *** Variables ***
@@ -11,6 +10,6 @@ Vendas Transferencia de Carnes
         Login in FJ Frigo    ${base}
         Select Menu Transferencia de Carne
         Fill Forms in Transferencia de Carne
-        Export XLSX in Transferencia de Carne
+        Export XLSX in Transferencia de Carne    ${base}
     # END
     
