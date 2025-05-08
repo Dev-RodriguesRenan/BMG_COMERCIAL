@@ -30,10 +30,10 @@ Select Base in FJ Frigo
         Select Option    3
     ELSE IF    '${base}' == 'BMG FOUR FRIGO'
         Select Primary Option
-        Select Option    1
+        Select Option    7
     ELSE IF    '${base}' == 'BMG VILA BELA'
         Select Primary Option
-        Select Option    1
+        Select Option    6
     ELSE
        Log    Escolhendo a base default: BMG Central
     END
@@ -74,20 +74,20 @@ Close FJ Frigo
     Switch Window FjFrigo 
     Sleep    5s
     Alt F4
-
+# Seleciona a primeira opção de base
 Select Primary Option
     FOR    ${counter}    IN RANGE    0    6    1
         Log    ${counter}
         Press Key    up
     END
-
+# Seleciona a opção desejada
 Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
         Log    ${counter}
         Press Key    down
     END
-
+# Procura o icone até que o mesmo seja encontrado
 Procurar Icone
     [Arguments]    ${icon}
     ${isCancel}    Exists    ${icon}.png    10

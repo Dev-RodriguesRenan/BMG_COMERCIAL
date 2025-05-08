@@ -3,16 +3,21 @@ import shutil
 import pandas as pd
 from pathlib import Path
 
+# Definindo o caminho base para os documentos
 BASE_DOCUMENTS = Path("C:\\Users\\PCVJ\\Documents")
 BASE_CARNES = os.path.join(BASE_DOCUMENTS, "carnes")
 BASE_INVENTARIO_INDUSTRIA = os.path.join(BASE_DOCUMENTS, "inventario_industria")
 BASE_VENDAS_TRANSFERENCIA = os.path.join(BASE_DOCUMENTS, "vendas_transferencia")
+
+# Verificando se as pastas existem, caso não existam, cria-las
 if not os.path.exists(BASE_CARNES):
     os.makedirs(BASE_CARNES)
 if not os.path.exists(BASE_INVENTARIO_INDUSTRIA):
     os.makedirs(BASE_INVENTARIO_INDUSTRIA)
 if not os.path.exists(BASE_VENDAS_TRANSFERENCIA):
     os.makedirs(BASE_VENDAS_TRANSFERENCIA)
+
+# Movendo os arquivos para as pastas corretas
 for arquivo in os.listdir(BASE_DOCUMENTS):
     if arquivo.endswith(".xlsx"):
         src_path = os.path.join(BASE_DOCUMENTS, arquivo)
@@ -28,14 +33,72 @@ for arquivo in os.listdir(BASE_DOCUMENTS):
 
 
 def merge_excel_files(folder_path: str):
-    all_data = pd.DataFrame()
-    for file in os.listdir(folder_path):
-        if file.endswith(".xlsx"):
-            file_path = os.path.join(folder_path, file)
-            filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
-            file_path_consolidado = os.path.join(folder_path, filename)
-            df = pd.read_excel(file_path)
-            all_data = pd.concat([all_data, df], ignore_index=True)
-            all_data.drop_duplicates(inplace=True)
-            all_data.to_excel(file_path_consolidado, index=False)
-    return file_path_consolidado
+    """Merge the Excel files into a single file.
+    Args:
+        folder_path (str): path of the folder where the files are located
+
+    Returns:
+        str: path of the consolidated file
+    """
+    try:
+        all_data = pd.DataFrame()
+        for file in os.listdir(folder_path):
+            if file.endswith(".xlsx") and not "consolidado" in file:
+                file_path = os.path.join(folder_path, file)
+                filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
+                file_path_consolidado = os.path.join(folder_path, filename)
+                df = get_dataframe_filtered(file_path, file)
+                print(f"Arquivo {file_path} lido: {df.head(3)}")
+                print("-" * 100)
+                all_data = pd.concat([all_data, df], ignore_index=True)
+                all_data.drop_duplicates(inplace=True)
+                all_data.to_excel(file_path_consolidado, index=False)
+        return file_path_consolidado
+    except Exception as e:
+        print(f"Erro ao processar os arquivos: {e}")
+        return None
+
+
+def get_dataframe_filtered(file_path_dataframe: str, df_name: str):
+    """Filter the dataframe according to the file name.
+
+    Args:
+        file_path_dataframe (str): full path of the file to be read
+        df_name (str): name of the file to be read and filtered
+
+    Returns:
+        pd.DataFrame: filtered dataframe
+    """
+    if "inventario" in df_name.lower():
+        print("-" * 100)
+        print("Lendo linhas do inventario")
+        print("-" * 100)
+        return pd.read_excel(file_path_dataframe, header=3)
+    if "carne" in df_name.lower():
+        print("-" * 100)
+        print("Lendo linhas de carnes")
+        print("-" * 100)
+        return pd.read_excel(file_path_dataframe, header=4)
+    if "vendatransferencia" in df_name.lower():
+        print("-" * 100)
+        print("Lendo linhas do vendas transferencia")
+        print("-" * 100)
+        return pd.read_excel(file_path_dataframe, header=4)
+
+
+def main():
+    try:
+        filename = merge_excel_files(BASE_VENDAS_TRANSFERENCIA)
+        print(f"Arquivo consolidado de vendas criado: {filename}")
+        # enviar arquivo para o e-mail
+        filename = merge_excel_files(BASE_CARNES)
+        print(f"Arquivo consolidado de carnes criado: {filename}")
+        # enviar arquivo para o e-mail
+        filename = merge_excel_files(BASE_INVENTARIO_INDUSTRIA)
+        print(f"Arquivo consolidado de inventario criado: {filename}")
+        # enviar arquivo para o e-mail
+    except Exception as e:
+        print(f"Erro ao processar os arquivos: {e}")
+
+
+main()
