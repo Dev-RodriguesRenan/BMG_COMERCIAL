@@ -40,10 +40,22 @@ Export XLSX in Inventario de Industria
     # Clica no botao de exportar
     Wait Until Screen Contain    export_xls.png    30
     Click    export_xls.png
-    # Clica no icone do excel
-    Procurar Icone    excel_opened.png    
-    Wait Until Screen Contain    excel_opened.png    600
-    Click    excel_opened.png
-    Sleep    5s
-    Save XLSX    ${nome_arquivo}
-    Close FJ Frigo
+    # Verifica se é possivel gerar o arquivo
+    ${exists_not_xlsx}    Exists    nao_foi_possivel.png    12
+    IF    ${exists_not_xlsx} == True
+        Log    Não é possível gerar o arquivo XLSX
+        # Clica no botão de ok
+        Press Enter
+        Log    Não é possível gerar o arquivo XLSX
+        Close FJ Frigo
+    ELSE
+        Log    É possível gerar o arquivo XLSX
+        Log    Extraindo planilha da base: ${unit}
+        # Clica no icone do excel
+        Procurar Icone    excel_opened.png    
+        Wait Until Screen Contain    excel_opened.png    600
+        Click    excel_opened.png
+        Sleep    5s
+        Save XLSX    ${nome_arquivo}
+        Close FJ Frigo
+    END

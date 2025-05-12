@@ -39,8 +39,10 @@ Select Base in FJ Frigo
        Log    Escolhendo a base default: BMG Central
     END
     Press Enter
+    Sleep    1.5s
     Press Special Key    TAB
 Fill Credentials in FJ Frigo
+    Sleep    1.5s
     Press Special Key    TAB
     # verifica se o login e senha estão preenchidos
     ${is_loged}=    Exists    login.png    5
@@ -78,6 +80,12 @@ Close FJ Frigo
     Switch Window FjFrigo 
     Sleep    5s
     Alt F4
+    Log    Sistema fechado!!
+# Fecha o sistema da FJ Frigo
+Close Force
+    Sleep    2
+    Execute Kill
+    Log    Sistema fechado!!
 # Seleciona a primeira opção de base
 Select Primary Option
     FOR    ${counter}    IN RANGE    0    6    1
@@ -89,7 +97,7 @@ Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
         Log    ${counter}
-        Sleep    1s
+        Sleep    2s
         Press Key    down
     END
 # Procura o icone até que o mesmo seja encontrado

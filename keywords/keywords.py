@@ -1,3 +1,4 @@
+import os
 import pyautogui
 import pywinauto
 
@@ -28,3 +29,8 @@ def switch_window_fjFrigo():
 
 def press_key(key):
     pyautogui.press(key)
+
+
+def execute_kill():
+    os.system("taskkill /F /IM EXCEL.EXE")
+    os.system("taskkill /F /IM fjfrigo.exe")
