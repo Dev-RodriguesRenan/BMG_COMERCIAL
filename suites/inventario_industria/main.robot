@@ -1,6 +1,7 @@
 *** Settings ***
 Resource        ../../keywords/inventario_industria/keywords.robot
 Test Setup        Load Images
+Test Teardown    Close Force
 *** Variables ***
 # ${base}    BMG VILA BELA
 *** Test Cases ***

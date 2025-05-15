@@ -32,5 +32,9 @@ def press_key(key):
 
 
 def execute_kill():
-    os.system("taskkill /F /IM EXCEL.EXE")
-    os.system("taskkill /F /IM fjfrigo.exe")
+    try:
+        os.system("taskkill /F /IM EXCEL.EXE")
+        os.system("taskkill /F /IM fjfrigo.exe")
+    except Exception as e:
+        print(f"Error: {e}")
+        pass

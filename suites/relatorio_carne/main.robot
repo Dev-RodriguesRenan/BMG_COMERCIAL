@@ -1,7 +1,7 @@
 *** Settings ***
 Resource        ../../keywords/relatorio_carne/keywords.robot
 Test Setup        Load Images
-
+Test Teardown    Close Force
 *** Variables ***
 # ${base}    BMG VILA BELA
 

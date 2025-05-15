@@ -128,6 +128,7 @@ def main():
                 to_email=email_credentials["receiver"],
                 attachments=filename,
             )
+        print("Todos os arquivos foram processados e enviados com sucesso.")
     except Exception as e:
         print(f"Erro ao processar os arquivos: {e}")
 

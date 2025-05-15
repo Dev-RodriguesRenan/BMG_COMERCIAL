@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import time
 
 files = [
     "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/inventario_industria/main.robot",
@@ -8,6 +9,7 @@ files = [
 ]
 python_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python"
 updater_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/verificator.py"
+excel_executor_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/email_handler.py"
 
 
 def run_file(file_path):
@@ -17,8 +19,16 @@ def run_file(file_path):
 
 
 def run_all_cases():
-    for file in files:
-        run_file(file)
+    while True:
+        print("Running all cases!!")
+        for file in files:
+            run_file(file)
+        print("All cases finished running!!")
+        print("Running excel executor!!")
+        subprocess.run([python_path, excel_executor_path])
+        print("Finished excel executor!!")
+        print("Sleeping for 1 day...")
+        time.sleep(3600 * 24)
 
 
 def run_verificator_updade():
