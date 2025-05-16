@@ -1,3 +1,4 @@
+import os
 import subprocess
 import threading
 import time
@@ -9,7 +10,7 @@ files = [
 ]
 python_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python"
 updater_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/verificator.py"
-excel_executor_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/email_handler.py"
+excel_executor_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/excel_handler.py"
 
 
 def run_file(file_path):
@@ -42,3 +43,7 @@ if __name__ == "__main__":
     thread_2 = threading.Thread(target=run_verificator_updade)
     thread_1.start()
     thread_2.start()
+    print("Threads started!!")
+    input("Press any key to stop the program")
+    os.system("taskkill /f /im python.exe")
+    print("Program stopped!!")

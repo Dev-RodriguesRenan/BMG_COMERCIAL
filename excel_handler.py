@@ -10,6 +10,12 @@ BASE_CARNES = os.path.join(BASE_DOCUMENTS, "carnes")
 BASE_INVENTARIO_INDUSTRIA = os.path.join(BASE_DOCUMENTS, "inventario_industria")
 BASE_VENDAS_TRANSFERENCIA = os.path.join(BASE_DOCUMENTS, "vendas_transferencia")
 
+message = """
+<p>Segue o anexo do arquivo consolidado de {} gerado: </p>
+<p><b>{}</b></p>
+<p>Atenciosamente,</p>
+<p>Equipe de Técnica, (vjbots.com)</p>
+"""
 # Verificando se as pastas existem, caso não existam, cria-las
 if not os.path.exists(BASE_CARNES):
     os.makedirs(BASE_CARNES)
@@ -98,7 +104,9 @@ def main():
             # enviar arquivo para o e-mail
             send_email(
                 subject="Relatório de Vendas/Transferências Consolidado",
-                body=f"<h1>Segue o anexo do arquivo consolidado do Relatório de Vendas/Transferências gerado: <b>{filename}</b></h1>",
+                body=message.format(
+                    "Relatório de Vendas/Transferências", os.path.basename(filename)
+                ),
                 to_email=email_credentials["receiver"],
                 attachments=filename,
             )
@@ -111,7 +119,9 @@ def main():
             # enviar arquivo para o e-mail
             send_email(
                 subject="Relatório de Compra de Carne Consolidado",
-                body=f"<h1>Segue o anexo do arquivo consolidado de Relatório de Compra de Carne gerado: <b>{filename}</b></h1>",
+                body=message.format(
+                    "Relatório de Compra de Carne", os.path.basename(filename)
+                ),
                 to_email=email_credentials["receiver"],
                 attachments=filename,
             )
@@ -124,7 +134,9 @@ def main():
             # enviar arquivo para o e-mail
             send_email(
                 subject="Relatório de Inventário Indústria Consolidadas",
-                body=f"<h1>Segue o anexo do arquivo consolidado de Relatório de Inventário Indústria gerado: <b>{filename}</b></h1>",
+                body=message.format(
+                    "Relatório de Inventário Indústria", os.path.basename(filename)
+                ),
                 to_email=email_credentials["receiver"],
                 attachments=filename,
             )
