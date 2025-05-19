@@ -2,7 +2,7 @@ import os
 import time
 import smtplib
 from email import encoders
-from creads import email_credentials
+from credentials import email_credentials
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
