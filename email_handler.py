@@ -1,3 +1,4 @@
+import os
 import time
 import smtplib
 from email import encoders
@@ -40,7 +41,7 @@ def send_email(
 
 def attach_files(attachments: str):
     with open(attachments, "rb") as file:
-        filename = attachments.split("/")[-1]
+        filename = os.path.basename(attachments)
         attachment = MIMEBase("application", "octet-stream")
         attachment.set_payload(file.read())
         encoders.encode_base64(attachment)

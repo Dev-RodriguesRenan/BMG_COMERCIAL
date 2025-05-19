@@ -26,11 +26,9 @@ def verify_exists_update():
                     )
                     window.set_focus()
                     time.sleep(0.5)
-                    pyautogui.press("right")
-                    time.sleep(0.5)
                     pyautogui.press("enter")
                     print(
-                        "Janela de atualização encontrada e tecla 'right' e 'enter' pressionada para fechar o updater"
+                        "Janela de atualização encontrada e tecla 'enter' pressionada para atualizar o sistema"
                     )
         else:
             for window in windows_list_activated:
