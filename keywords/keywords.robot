@@ -14,6 +14,7 @@ Login in FJ Frigo
     Sleep    2s 
     Press Enter
     Wait Until Screen Contain    fj_banner.png    60
+    Sleep    5s    Aguarda para caso apareça a tela de update
     # Seleciona a base da FJ Frigo
     Select Base in FJ Frigo    ${base}
     Sleep    3s
