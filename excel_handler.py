@@ -3,6 +3,7 @@ import shutil
 import pandas as pd
 from pathlib import Path
 from email_handler import send_email, email_credentials
+from utils_handler import get_current_date
 
 # Definindo o caminho base para os documentos
 BASE_DOCUMENTS = Path("C:\\Users\\PCVJ\\Documents")
@@ -47,10 +48,15 @@ def merge_excel_files(folder_path: str):
     Returns:
         str: path of the consolidated file
     """
+    file_path_consolidado = None
     try:
         all_data = pd.DataFrame()
         for file in os.listdir(folder_path):
-            if file.endswith(".xlsx") and not "consolidado" in file:
+            if (
+                file.endswith(".xlsx")
+                and not "consolidado" in file
+                and get_current_date() in file
+            ):
                 file_path = os.path.join(folder_path, file)
                 filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
                 file_path_consolidado = os.path.join(folder_path, filename)

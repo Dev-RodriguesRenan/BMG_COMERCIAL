@@ -25,6 +25,10 @@ def get_name_file_of_unit(action, unit):
     return f"Relatorio{action}_{curent_date}_{unit}"
 
 
+def get_current_date():
+    return datetime.datetime.now().strftime("%Y%m%d_")
+
+
 def get_datetime_now():
     return datetime.datetime.now().strftime("%d%m%Y")
 
