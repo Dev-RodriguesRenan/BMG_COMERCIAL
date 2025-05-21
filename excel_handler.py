@@ -3,7 +3,7 @@ import shutil
 import pandas as pd
 from pathlib import Path
 from email_handler import send_email, email_credentials
-from utils_handler import get_current_date
+from utils_handler import get_current_date, move_files_to_bkp_folder
 
 # Definindo o caminho base para os documentos
 BASE_DOCUMENTS = Path("C:\\Users\\PCVJ\\Documents")
@@ -58,14 +58,16 @@ def merge_excel_files(folder_path: str):
                 and get_current_date() in file
             ):
                 file_path = os.path.join(folder_path, file)
-                filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
-                file_path_consolidado = os.path.join(folder_path, filename)
+
                 df = get_dataframe_filtered(file_path, file)
                 print(f"Arquivo {file_path} lido: {df.head(3)}")
                 print("-" * 100)
                 all_data = pd.concat([all_data, df], ignore_index=True)
-                all_data.drop_duplicates(inplace=True)
-                all_data.to_excel(file_path_consolidado, index=False)
+                # all_data.drop_duplicates(inplace=True)
+        if not all_data.empty:
+            filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
+            file_path_consolidado = os.path.join(folder_path, filename)
+            all_data.to_excel(file_path_consolidado, index=False)
         return file_path_consolidado
     except Exception as e:
         print(f"Erro ao processar os arquivos: {e}")
@@ -147,8 +149,26 @@ def main():
                 attachments=filename,
             )
         print("Todos os arquivos foram processados e enviados com sucesso.")
+        # mover os arquivos para a pasta de backup
+        to_do_bkp()
     except Exception as e:
-        print(f"Erro ao processar os arquivos: {e}")
+        print(f"Erro ao processar os arquivos e realizar os envios: {e}")
+
+
+def to_do_bkp():
+    """Move the files to the backup folder."""
+    for file in os.listdir(BASE_INVENTARIO_INDUSTRIA):
+        file_path = os.path.join(BASE_INVENTARIO_INDUSTRIA, file)
+        bkp_path = os.path.join(BASE_INVENTARIO_INDUSTRIA, "bkp")
+        move_files_to_bkp_folder(file_path, bkp_path)
+    for file in os.listdir(BASE_CARNES):
+        file_path = os.path.join(BASE_CARNES, file)
+        bkp_path = os.path.join(BASE_CARNES, "bkp")
+        move_files_to_bkp_folder(file_path, bkp_path)
+    for file in os.listdir(BASE_VENDAS_TRANSFERENCIA):
+        file_path = os.path.join(BASE_VENDAS_TRANSFERENCIA, file)
+        bkp_path = os.path.join(BASE_VENDAS_TRANSFERENCIA, "bkp")
+        move_files_to_bkp_folder(file_path, bkp_path)
 
 
 main()

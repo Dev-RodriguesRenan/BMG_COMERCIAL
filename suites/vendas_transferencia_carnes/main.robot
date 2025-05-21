@@ -8,14 +8,14 @@ Test Teardown    Close Force
 Vendas Transferencia de Carnes
     FOR    ${base}    IN    @{BASES}
         TRY
-            Log    Extraindo planilha da base: ${base}    level=DEBUG    console=True
+            Log    \nExtraindo planilha da base: ${base}\n    level=DEBUG    console=True
             Login in FJ Frigo    ${base}
             Select Menu Transferencia de Carne
             Fill Forms in Transferencia de Carne
             Export XLSX in Transferencia de Carne    ${base}
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
         EXCEPT    message
-            Log    Erro ao executar o caso de teste em: ${base}    level=DEBUG    console=True
+            Log    \nErro ao executar o caso de teste em: ${base}\n    level=DEBUG    console=True
             Close Force
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
             CONTINUE

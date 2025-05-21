@@ -1,4 +1,6 @@
 import datetime
+import os
+import shutil
 
 
 def check_if_the_day_is_useful():
@@ -35,3 +37,19 @@ def get_datetime_now():
 
 def get_first_day_of_month():
     return datetime.datetime.now().replace(day=1).strftime("%d%m%Y")
+
+
+def move_files_to_bkp_folder(file_path, bkp_folder):
+    """Move files to a backup folder.
+
+    Args:
+        file_path (str): Path of the file to be moved.
+        bkp_folder (str, optional): Path of the backup folder. Defaults to os.path.join(BASE_DOCUMENTS,'bkp').
+    """
+    if not os.path.exists(bkp_folder):
+        os.makedirs(bkp_folder)
+    try:
+        shutil.move(file_path, bkp_folder)
+        print(f">> Arquivo {file_path} movido para a pasta de backup.")
+    except Exception as e:
+        print(f">> Erro ao mover o arquivo {file_path} para a pasta de backup: {e}")

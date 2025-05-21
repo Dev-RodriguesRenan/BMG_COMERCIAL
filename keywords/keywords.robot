@@ -11,7 +11,7 @@ Login in FJ Frigo
     Press Key    win
     Sleep    2s
     With Keys Write Text    fjfrigo
-    Sleep    2s 
+    Sleep    5s 
     Press Enter
     Wait Until Screen Contain    fj_banner.png    60
     Sleep    5s    Aguarda para caso apareça a tela de update
