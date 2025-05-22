@@ -30,22 +30,22 @@ Fill Forms in Transferencia de Carne
     # Preenche o campo de data final
     With Keys Write Text    ${DATA_FINAL}
     # Passa para o proximo campo
-    FOR    ${counter}    IN RANGE    0    17    1
+    FOR    ${counter}    IN RANGE    0    16    1
         Log    Press TAB ${counter}
         Press Special Key    TAB
     END
-    # Preench o campo tipo faturamento com 114 e -1
+    # Tipo de faturamento: preencher 114 <enter>, e depois -1 <enter>
     With Keys Write Text    114
     Press Enter
     With Keys Write Text    -1
     Press Enter
     # Passa para o proximo campo
-    FOR    ${counter}    IN RANGE    0    1    1
+    FOR    ${counter}    IN RANGE    0    2    1
         Log    Press TAB ${counter}
         Press Special Key    TAB
     END
-    # Preench o campo filial
-    With Keys Write Text    2
+    # Filal: digitar -2 para limar <enter>, e -1 <enter> para selecionar todas as filiais.
+    With Keys Write Text    -2
     Press Enter
     With Keys Write Text    -1
     Press Enter
@@ -74,7 +74,7 @@ Export XLSX in Transferencia de Carne
         Log    Extraindo planilha da base: ${unit}
         # Clica no icone do excel
         Procurar Icone    excel_opened.png
-        Wait Until Screen Contain    excel_opened.png    120
+        Wait Until Screen Contain    excel_opened.png    600
         Click    excel_opened.png
         Sleep    5s
         Save XLSX    ${nome_arquivo}
