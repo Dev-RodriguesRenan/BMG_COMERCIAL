@@ -54,12 +54,16 @@ Export XLSX in Relatorio de Carne
     Click    export_xls.png
     # Verifica se é possivel gerar o arquivo
     ${exists_not_xlsx}    Exists    nao_foi_possivel.png    12
+    ${exists_menu_error}    Exists    menu_error.png    12
     IF    ${exists_not_xlsx} == True
         Log    Não é possível gerar o arquivo XLSX
         # Clica no botão de ok
         Press Enter
         Log    Não é possível gerar o arquivo XLSX
         Close FJ Frigo
+    ELSE IF    ${exists_menu_error} == True
+        Log    Não é possível gerar o arquivo XLSX
+        Close Force
     ELSE
         Log    É possível gerar o arquivo XLSX
         Log    Extraindo planilha da base: ${unit}
