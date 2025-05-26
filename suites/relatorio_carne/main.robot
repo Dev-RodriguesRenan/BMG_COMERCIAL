@@ -3,7 +3,11 @@ Resource        ../../keywords/relatorio_carne/keywords.robot
 Test Setup        Load Images
 Test Teardown    Close Force
 *** Variables ***
-# ${base}    BMG FOUR FRIGO
+@{BASES}    
+...    BMG Central
+...    Central Nostrobeef
+...    BMG VILA BELA
+...    BMG FOUR FRIGO
 
 *** Test Cases ***
 Relatorio de Carne

@@ -3,7 +3,11 @@ Resource        ../../keywords/inventario_industria/keywords.robot
 Test Setup        Load Images
 Test Teardown    Close Force
 *** Variables ***
-# ${base}    BMG VILA BELA
+@{BASES}    
+...    BMG Central
+...    Central Nostrobeef
+...    BMG VILA BELA
+...    BMG FOUR FRIGO
 *** Test Cases ***
 Inverntario de Industria
     FOR    ${base}    IN    @{BASES}

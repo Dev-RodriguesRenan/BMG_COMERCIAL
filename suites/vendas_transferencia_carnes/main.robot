@@ -3,7 +3,11 @@ Resource        ../keywords/venda_transferencia_carne/keywords.robot
 Test Setup        Load Images
 Test Teardown    Close Force
 *** Variables ***
-# ${base}    BMG VILA BELA
+@{BASES}    
+...    BMG Central
+...    Central Nostrobeef
+...    BMG VILA BELA
+...    BMG FOUR FRIGO
 *** Test Cases ***
 Vendas Transferencia de Carnes
     FOR    ${base}    IN    @{BASES}
