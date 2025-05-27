@@ -1,5 +1,6 @@
 import datetime
 import os
+import time
 import shutil
 
 
@@ -50,6 +51,10 @@ def move_files_to_bkp_folder(file_path, bkp_folder):
         os.makedirs(bkp_folder)
     try:
         shutil.move(file_path, bkp_folder)
-        print(f">> Arquivo {file_path} movido para a pasta de backup.")
+        print(
+            f"{time.strftime('%X')} >>> Arquivo {file_path} movido para a pasta de backup."
+        )
     except Exception as e:
-        print(f">> Erro ao mover o arquivo {file_path} para a pasta de backup: {e}")
+        print(
+            f"{time.strftime('%X')} >>> Erro ao mover o arquivo {file_path} para a pasta de backup: {e}"
+        )

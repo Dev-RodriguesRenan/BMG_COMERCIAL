@@ -17,7 +17,7 @@ def verify_exists_update():
             for window in windows_list_activated
         )
         print(
-            f">>> Controle administrativo/Login de usuário {has_controle_admin}",
+            f"{time.strftime('%X')} >>> Controle administrativo/Login de usuário {has_controle_admin}",
             end="\r",
         )
         # Se não existir janela de Controle administrativo, procura janela de atualização
@@ -25,22 +25,22 @@ def verify_exists_update():
             for window in windows_list_activated:
                 if "atualização" in window.window_text():
                     print(
-                        ">>> Janela de atualização encontrada, iremos atualizar o sistema"
+                        f"{time.strftime('%X')} >>> Janela de atualização encontrada, iremos atualizar o sistema"
                     )
                     window.set_focus()
                     time.sleep(0.5)
                     pyautogui.press("enter")
                     print(
-                        "Janela de atualização encontrada e tecla 'enter' pressionada para atualizar o sistema"
+                        f"{time.strftime('%X')} >>> Janela de atualização encontrada e tecla 'enter' pressionada para atualizar o sistema"
                     )
         else:
             for window in windows_list_activated:
                 if "atualização" in window.window_text():
                     print(
-                        ">>> Janela de atualização encontrada, iremos ignorar pois o sistema está em uso!!"
+                        f"{time.strftime('%X')} >>> Janela de atualização encontrada, iremos ignorar pois o sistema está em uso!!"
                     )
                     os.system("taskkill /f /im FJUpdaterLocal.exe")
-                    print(">>> Ignorada com sucesso!!")
+                    print(f"{time.strftime('%X')} >>> Ignorada com sucesso!!")
 
 
 if __name__ == "__main__":
