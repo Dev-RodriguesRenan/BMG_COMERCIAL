@@ -41,11 +41,13 @@ Fill Forms in Relatorio de Carne
     With Keys Write Text    -1
     Press Enter
     # Passa para o proximo campo, filial, e preenche com -1 (1 tabs)
-    FOR    ${counter}    IN RANGE    0    2    1
+    FOR    ${counter}    IN RANGE    0    1    1
         Log    ${counter}
         Press Special Key    TAB
     END
-    With Keys Write Text    -1
+    # Digita -1 com input text
+    Input Text     ${EMPTY}     -1
+    Press Enter
 Export XLSX in Relatorio de Carne
     [Arguments]    ${unit}
     ${nome_arquivo}  Get Name File Of Unit    Carne    ${unit}
