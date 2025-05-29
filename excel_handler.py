@@ -3,7 +3,8 @@ import shutil
 import pandas as pd
 import time
 from pathlib import Path
-from email_handler import send_email, email_credentials
+from email_handler import send_email
+from credentials import email_credentials
 from utils_handler import get_current_date, move_files_to_bkp_folder
 
 # Definindo o caminho base para os documentos
@@ -18,6 +19,7 @@ message = """
 <p>Atenciosamente,</p>
 <p>Equipe de Técnica, (vjbots.com)</p>
 """
+receivers = [str(receiver).strip() for receiver in email_credentials["receivers"]]
 # Verificando se as pastas existem, caso não existam, cria-las
 if not os.path.exists(BASE_CARNES):
     os.makedirs(BASE_CARNES)
@@ -113,14 +115,15 @@ def main():
                 f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Vendas/Transferências criado: {filename}"
             )
             # enviar arquivo para o e-mail
-            send_email(
-                subject="Relatório de Vendas/Transferências Consolidado",
-                body=message.format(
-                    "Relatório de Vendas/Transferências", os.path.basename(filename)
-                ),
-                to_email=email_credentials["receiver"],
-                attachments=filename,
-            )
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Vendas/Transferências Consolidado",
+                    body=message.format(
+                        "Relatório de Vendas/Transferências", os.path.basename(filename)
+                    ),
+                    to_email=receiver,
+                    attachments=filename,
+                )
         # gerar o arquivo consolidado de carnes
         filename = merge_excel_files(BASE_CARNES)
         if filename:
@@ -128,14 +131,15 @@ def main():
                 f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Compra de Carne criado: {filename}"
             )
             # enviar arquivo para o e-mail
-            send_email(
-                subject="Relatório de Compra de Carne Consolidado",
-                body=message.format(
-                    "Relatório de Compra de Carne", os.path.basename(filename)
-                ),
-                to_email=email_credentials["receiver"],
-                attachments=filename,
-            )
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Compra de Carne Consolidado",
+                    body=message.format(
+                        "Relatório de Compra de Carne", os.path.basename(filename)
+                    ),
+                    to_email=receiver,
+                    attachments=filename,
+                )
         # gerar o arquivo consolidado de inventario
         filename = merge_excel_files(BASE_INVENTARIO_INDUSTRIA)
         if filename:
@@ -143,14 +147,15 @@ def main():
                 f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Inventário Indústria criado: {filename}"
             )
             # enviar arquivo para o e-mail
-            send_email(
-                subject="Relatório de Inventário Indústria Consolidadas",
-                body=message.format(
-                    "Relatório de Inventário Indústria", os.path.basename(filename)
-                ),
-                to_email=email_credentials["receiver"],
-                attachments=filename,
-            )
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Inventário Indústria Consolidadas",
+                    body=message.format(
+                        "Relatório de Inventário Indústria", os.path.basename(filename)
+                    ),
+                    to_email=receiver,
+                    attachments=filename,
+                )
         print(
             f"{time.strftime('%X')} >>> Todos os arquivos foram processados e enviados com sucesso."
         )
