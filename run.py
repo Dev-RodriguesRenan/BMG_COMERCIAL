@@ -37,8 +37,11 @@ def run_verificator_update():
 
 
 if __name__ == "__main__":
+    # Verifica e atualiza o sistema caso necessário
     schedule.every().day.at("06:50").do(run_file, updater_path)
+    # Loop para fechar o updater caso abra no meio da execução
     schedule.every().day.at("07:00").do(run_verificator_update)
+    # Executa todos os casos de teste diariamente às 07:00
     schedule.every().day.at("07:00").do(run_all_cases)
 
     while True:
