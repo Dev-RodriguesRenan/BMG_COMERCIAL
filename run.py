@@ -1,15 +1,15 @@
-import os
-import subprocess
-import threading
 import time
+import schedule
+import subprocess
 
 files = [
     "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/inventario_industria/main.robot",
     "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/relatorio_carne/main.robot",
     "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/vendas_transferencia_carnes/main.robot",
 ]
+updater_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/updater/main.robot"
 python_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python"
-updater_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/verificator.py"
+verificator_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/verificator.py"
 excel_executor_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/excel_handler.py"
 
 
@@ -28,22 +28,19 @@ def run_all_cases():
         print("Running excel executor!!")
         subprocess.run([python_path, excel_executor_path])
         print("Finished excel executor!!")
-        print("Sleeping for 1 day...")
-        time.sleep(3600 * 24)
 
 
-def run_verificator_updade():
+def run_verificator_update():
     print(f"Running verificator update!!")
-    subprocess.run([python_path, updater_path])
+    subprocess.run([python_path, verificator_path])
     print(f"Finished running verificator update!!")
 
 
 if __name__ == "__main__":
-    thread_1 = threading.Thread(target=run_all_cases)
-    thread_2 = threading.Thread(target=run_verificator_updade)
-    thread_1.start()
-    thread_2.start()
-    print("Threads started!!")
-    input("Press any key to stop the program")
-    os.system("taskkill /f /im python.exe")
-    print("Program stopped!!")
+    schedule.every().day.at("06:50").do(run_file, updater_path)
+    schedule.every().day.at("07:00").do(run_verificator_update)
+    schedule.every().day.at("07:00").do(run_all_cases)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
