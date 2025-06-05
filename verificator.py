@@ -8,17 +8,19 @@ import datetime
 def update_fj_frigo():
     windwos_list = pywinauto.Desktop(backend="uia").windows()
     for window in windwos_list:
-        if "Atualização" in window.window_text():
+        if "atualização" in window.window_text():
             print(
                 f"{time.strftime('%X')} >>> Janela de atualização encontrada, iremos atualizar o sistema"
             )
+            # Foca a janela de atualização
             window.set_focus()
-            time.sleep(1.5)
+            time.sleep(2.5)
+            # Pressiona a tecla "enter" para confirmar a atualização
             pyautogui.press("enter")
             print(
                 f"{time.strftime('%X')} >>> Janela de atualização encontrada e tecla 'enter' pressionada para atualizar o sistema"
             )
-            time.sleep(10)
+            time.sleep(15)
             return True
     print(f"{time.strftime('%X')} >>> Nenhuma janela de atualização encontrada.")
     return False
