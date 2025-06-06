@@ -1,3 +1,4 @@
+import sys
 import time
 import schedule
 import subprocess
@@ -37,13 +38,23 @@ def run_verificator_update():
 
 
 if __name__ == "__main__":
-    # Verifica e atualiza o sistema caso necessário
-    schedule.every().day.at("06:50").do(run_file, updater_path)
-    # Loop para fechar o updater caso abra no meio da execução
-    schedule.every().day.at("07:00").do(run_verificator_update)
-    # Executa todos os casos de teste diariamente às 07:00
-    schedule.every().day.at("07:00").do(run_all_cases)
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "updater":
+            run_file(updater_path)
+        elif sys.argv[1] == "--debug":
+            run_file(updater_path)
+            run_all_cases()
+        else:
+            print("Invalid argument. Use 'updater' or '--debug'.")
+            sys.exit(1)
+    else:
+        # Verifica e atualiza o sistema caso necessário
+        schedule.every().day.at("06:50").do(run_file, updater_path)
+        # Loop para fechar o updater caso abra no meio da execução
+        schedule.every().day.at("07:00").do(run_verificator_update)
+        # Executa todos os casos de teste diariamente às 07:00
+        schedule.every().day.at("07:00").do(run_all_cases)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
