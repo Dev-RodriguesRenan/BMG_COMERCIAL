@@ -21,14 +21,13 @@ def run_file(file_path):
 
 
 def run_all_cases():
-    while True:
-        print("Running all cases!!")
-        for file in files:
-            run_file(file)
-        print("All cases finished running!!")
-        print("Running excel executor!!")
-        subprocess.run([python_path, excel_executor_path])
-        print("Finished excel executor!!")
+    print("Running all cases!!")
+    for file in files:
+        run_file(file)
+    print("All cases finished running!!")
+    print("Running excel executor!!")
+    subprocess.run([python_path, excel_executor_path])
+    print("Finished excel executor!!")
 
 
 def run_verificator_update():
@@ -39,8 +38,10 @@ def run_verificator_update():
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        if sys.argv[1] == "updater":
+        if sys.argv[1] == "--updater":
             run_file(updater_path)
+        elif sys.argv[1] == "--cases":
+            run_all_cases()
         elif sys.argv[1] == "--debug":
             run_file(updater_path)
             run_all_cases()
