@@ -21,5 +21,5 @@ Verify And Update FJ Frigo
         Log    \nFJFRIGO ATUALIZADO...\n    level=DEBUG    console=True
     ELSE
         Log    \nFJFRIGO NÃO FOI ATUALIZADO...\n    level=DEBUG    console=True
+        Alt F4
     END
-    Alt F4
