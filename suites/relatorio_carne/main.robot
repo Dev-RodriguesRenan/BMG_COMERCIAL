@@ -13,7 +13,7 @@ Test Teardown    Close Force
 Relatorio de Carne
     FOR    ${base}    IN    @{BASES}
         TRY
-                Log    \nExtraindo planilha da base: ${base}\n    level=DEBUG    console=True
+                Log    \nExtraindo planilha RELATORIO DE CARNES da base: ${base}\n    level=DEBUG    console=True
                 Login in FJ Frigo    ${base}
                 Select Menu Relatorio de Carne
                 Fill Forms in Relatorio de Carne

@@ -6,6 +6,11 @@ import datetime
 
 
 def update_fj_frigo():
+    """Atualiza o sistema FJ Frigo.
+
+    Returns:
+        bool: True se a atualização foi bem-sucedida, False caso contrário.
+    """
     windows_list = pywinauto.Desktop(backend="uia").windows()
     for window in windows_list:
         if "atualização" in window.window_text().lower():

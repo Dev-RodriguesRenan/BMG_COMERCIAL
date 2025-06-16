@@ -12,7 +12,7 @@ Test Teardown    Close Force
 Vendas Transferencia de Carnes
     FOR    ${base}    IN    @{BASES}
         TRY
-            Log    \nExtraindo planilha da base: ${base}\n    level=DEBUG    console=True
+            Log    \nExtraindo planilha VENDAS/TRANSFERENCIA da base: ${base}\n    level=DEBUG    console=True
             Login in FJ Frigo    ${base}
             Select Menu Transferencia de Carne
             Fill Forms in Transferencia de Carne

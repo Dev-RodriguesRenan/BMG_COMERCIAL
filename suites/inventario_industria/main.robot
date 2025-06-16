@@ -12,7 +12,7 @@ Test Teardown    Close Force
 Inverntario de Industria
     FOR    ${base}    IN    @{BASES}
         TRY
-            Log    \nExtraindo planilha da base: ${base}\n    level=DEBUG    console=True
+            Log    \nExtraindo planilha INVENTARIO DE INDUSTRIA da base: ${base}\n    level=DEBUG    console=True
             Login in FJ Frigo    ${base}
             Select Menu Inventario de Industria
             Fill Forms in Inventario de Industria
