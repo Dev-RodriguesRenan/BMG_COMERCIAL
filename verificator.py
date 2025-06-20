@@ -76,6 +76,7 @@ def verify_exists_update(duration_hours=2):
                     )
                     os.system("taskkill /f /im FJUpdaterLocal.exe")
                     print(f"{time.strftime('%X')} >>> Ignorada com sucesso!!")
+        time.sleep(1)
 
 
 if __name__ == "__main__":

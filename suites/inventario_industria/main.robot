@@ -6,8 +6,8 @@ Test Teardown    Close Force
 @{BASES}    
 ...    BMG Central
 ...    Central Nostrobeef
-...    BMG VILA BELA
-...    BMG FOUR FRIGO
+# ...    BMG VILA BELA
+# ...    BMG FOUR FRIGO
 *** Test Cases ***
 Inverntario de Industria
     FOR    ${base}    IN    @{BASES}

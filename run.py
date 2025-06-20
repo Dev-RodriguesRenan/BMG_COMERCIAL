@@ -49,12 +49,13 @@ if __name__ == "__main__":
             print("Invalid argument. Use 'updater' or '--debug'.")
             sys.exit(1)
     else:
+        print("Waiting hours to start...")
         # Verifica e atualiza o sistema caso necessário
-        schedule.every().day.at("06:50").do(run_file, updater_path)
+        schedule.every().day.at("06:00").do(run_file, updater_path)
         # Loop para fechar o updater caso abra no meio da execução
-        schedule.every().day.at("07:00").do(run_verificator_update)
-        # Executa todos os casos de teste diariamente às 07:00
-        schedule.every().day.at("07:00").do(run_all_cases)
+        schedule.every().day.at("06:10").do(run_verificator_update)
+        # Executa todos os casos de teste diariamente às 06:10
+        schedule.every().day.at("06:10").do(run_all_cases)
 
         while True:
             schedule.run_pending()
