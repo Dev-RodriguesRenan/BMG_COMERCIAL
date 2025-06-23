@@ -31,9 +31,9 @@ def run_all_cases():
 
 
 def run_verificator_update():
-    print(f"Running verificator update!!")
+    print("Running verificator update!!")
     subprocess.run([python_path, verificator_path])
-    print(f"Finished running verificator update!!")
+    print("Finished running verificator update!!")
 
 
 if __name__ == "__main__":

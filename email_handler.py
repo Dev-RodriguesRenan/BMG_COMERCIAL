@@ -20,7 +20,7 @@ def send_email(
         from_email (str): email address of sender
         attachments (str, optional): path to attachments. Defaults to None.
     """
-    print(f'{time.strftime("%X")}>>> Sending email to {to_email}...')
+    print(f"{time.strftime('%X')}>>> Sending email to {to_email}...")
     message = MIMEMultipart()
     message["From"] = from_email
     message["To"] = to_email
@@ -30,13 +30,13 @@ def send_email(
     if attachments:
         att = attach_files(attachments)
         message.attach(att)
-        print(f'{time.strftime("%X")}>>> Attachment {attachments} added to email.')
+        print(f"{time.strftime('%X')}>>> Attachment {attachments} added to email.")
 
     with smtplib.SMTP("smtp.gmail.com", 587) as server:
         server.starttls()
         server.login(from_email, email_credentials["password"])
         server.sendmail(from_email, to_email, message.as_string())
-        print(f'{time.strftime("%X")}>>> Email sent sucessfully!!')
+        print(f"{time.strftime('%X')}>>> Email sent sucessfully!!")
 
 
 def attach_files(attachments: str):

@@ -32,13 +32,13 @@ if not os.path.exists(BASE_VENDAS_TRANSFERENCIA):
 for arquivo in os.listdir(BASE_DOCUMENTS):
     if arquivo.endswith(".xlsx"):
         src_path = os.path.join(BASE_DOCUMENTS, arquivo)
-        if "Inventario" in arquivo and not "consolidado" in arquivo:
+        if "Inventario" in arquivo and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_INVENTARIO_INDUSTRIA, arquivo)
             shutil.move(src_path, dst_path)
-        if "VendaTransferencia" in arquivo and not "consolidado" in arquivo:
+        if "VendaTransferencia" in arquivo and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_VENDAS_TRANSFERENCIA, arquivo)
             shutil.move(src_path, dst_path)
-        if "Carne" in arquivo and not "consolidado" in arquivo:
+        if "Carne" in arquivo and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_CARNES, arquivo)
             shutil.move(src_path, dst_path)
 
@@ -57,7 +57,7 @@ def merge_excel_files(folder_path: str):
         for file in os.listdir(folder_path):
             if (
                 file.endswith(".xlsx")
-                and not "consolidado" in file
+                and "consolidado" not in file
                 and get_current_date() in file
             ):
                 file_path = os.path.join(folder_path, file)
