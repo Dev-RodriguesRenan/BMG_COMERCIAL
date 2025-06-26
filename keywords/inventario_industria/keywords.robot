@@ -45,19 +45,19 @@ Export XLSX in Inventario de Industria
     ${exists_menu_error}    Exists    menu_error.png    12
     
     IF    ${exists_not_xlsx} == True
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         # Clica no botão de ok
         Press Enter
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         Close FJ Frigo
     ELSE IF    ${exists_menu_error} == True
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         Close Force
     ELSE
-        Log    É possível gerar o arquivo XLSX
-        Log    Extraindo planilha da base: ${unit}
+        Log    É possível gerar o arquivo XLSX    console=True
+        Log    Extraindo planilha da base: ${unit}    console=True
         # Clica no icone do excel
-        Procurar Icone    excel_opened.png    
+        Procurar Icone    excel_opened    
         Wait Until Screen Contain    excel_opened.png    600
         Click    excel_opened.png
         Sleep    5s

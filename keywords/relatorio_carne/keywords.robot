@@ -24,16 +24,16 @@ Select Menu Relatorio de Carne
 Fill Forms in Relatorio de Carne
     # Preenche o campo com a data do dia primeiro deste mês
     ${DATA_INICIAL}    Get First Day Of Month
-    Log    ${DATA_INICIAL}
+    Log    ${DATA_INICIAL}    console=True
     ${DATA_FINAL}    Take Last Business Day
-    Log    ${DATA_FINAL}
+    Log    ${DATA_FINAL}    console=True
     # Preenche o campo de data inicial
     With Keys Write Text    ${DATA_INICIAL}
     # Preenche o campo de data final
     With Keys Write Text    ${DATA_FINAL}
     # Passa para o proximo campo, tipo faturamento, e preenche com 1113 e -1 (12 tabs)
     FOR    ${counter}    IN RANGE    0    12    1
-        Log    ${counter}
+        Log    ${counter}    
         Press Special Key    TAB
     END
     With Keys Write Text    1113    
@@ -42,7 +42,7 @@ Fill Forms in Relatorio de Carne
     Press Enter
     # Passa para o proximo campo, filial, e preenche com -1 (1 tabs)
     FOR    ${counter}    IN RANGE    0    1    1
-        Log    ${counter}
+        Log    ${counter}    
         Press Special Key    TAB
     END
     # Digita -1 com input text
@@ -58,19 +58,19 @@ Export XLSX in Relatorio de Carne
     ${exists_not_xlsx}    Exists    nao_foi_possivel.png    12
     ${exists_menu_error}    Exists    menu_error.png    12
     IF    ${exists_not_xlsx} == True
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         # Clica no botão de ok
         Press Enter
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         Close FJ Frigo
     ELSE IF    ${exists_menu_error} == True
-        Log    Não é possível gerar o arquivo XLSX
+        Log    Não é possível gerar o arquivo XLSX    console=True
         Close Force
     ELSE
-        Log    É possível gerar o arquivo XLSX
-        Log    Extraindo planilha da base: ${unit}
+        Log    É possível gerar o arquivo XLSX    console=True
+        Log    Extraindo planilha da base: ${unit}    console=True
         # Clica no icone do excel
-        Procurar Icone    excel_opened.png    
+        Procurar Icone    excel_opened    
         Wait Until Screen Contain    excel_opened.png    120
         Click    excel_opened.png
         Sleep    5s

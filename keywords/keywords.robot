@@ -37,7 +37,7 @@ Select Base in FJ Frigo
         Select Primary Option
         Select Option    6
     ELSE
-       Log    Escolhendo a base default: BMG Central
+       Log    Escolhendo a base default: BMG Central    console=True
     END
     Press Enter
     Sleep    1.5s
@@ -49,12 +49,12 @@ Fill Credentials in FJ Frigo
     ${is_loged}=    Exists    login.png    5
     IF    '${is_loged}' == 'False'
         With Keys Write Text    ${LOGIN}
-        Log    Preechendo login do usuario: ${LOGIN}
+        Log    Preechendo login do usuario: ${LOGIN}    console=True
     END
     Press Special Key    TAB
     ${is_loged}=    Exists    password.png    5
     IF    '${is_loged}' == 'False'
-        Log    Preechendo senha do usuario: ${PASSWORD}
+        Log    Preechendo senha do usuario: ${PASSWORD}    console=True
         With Keys Write Text    ${PASSWORD}
     END
     Press Enter
@@ -81,23 +81,23 @@ Close FJ Frigo
     Switch Window FjFrigo 
     Sleep    5s
     Alt F4
-    Log    Sistema fechado!!
+    Log    Sistema fechado!!    console=True
 # Fecha o sistema da FJ Frigo
-Close Force
+Close Force    
     Sleep    2
     Execute Kill
-    Log    Sistema fechado!!
+    Log    Sistema fechado!!    console=True
 # Seleciona a primeira opção de base
 Select Primary Option
     FOR    ${counter}    IN RANGE    0    6    1
-        Log    ${counter}
+        Log    ${counter}    
         Press Key    up
     END
 # Seleciona a opção desejada
 Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
-        Log    ${counter}
+        Log    ${counter}    
         Sleep    2s
         Press Key    down
     END
@@ -108,8 +108,8 @@ Procurar Icone
     WHILE    ${isCancel} == 'True'
         ${isCancel}    Exists    ${icon}.png    10
         IF    ${isCancel} == 'False'
-            Log    ${icon} encontrado
+            Log    ${icon} encontrado    console=True
             BREAK
         END
-        Log    ${icon} não encontrado
+        Log    ${icon} não encontrado    console=True
     END
