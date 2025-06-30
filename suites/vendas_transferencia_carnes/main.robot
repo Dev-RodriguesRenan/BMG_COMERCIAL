@@ -6,7 +6,7 @@ Test Teardown    Close Force
 @{BASES}    
 ...    BMG Central
 ...    Central Nostrobeef
-...    BMG VILA BELA
+# ...    BMG VILA BELA
 ...    BMG FOUR FRIGO
 *** Test Cases ***
 Vendas Transferencia de Carnes
@@ -18,8 +18,9 @@ Vendas Transferencia de Carnes
             Fill Forms in Transferencia de Carne
             Export XLSX in Transferencia de Carne    ${base}
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
-        EXCEPT    message
+        EXCEPT     AS     ${error}
             Log    \nErro ao executar o caso de teste em: ${base}\n    level=DEBUG    console=True
+            Log    \nException: ${error}\n    level=DEBUG    console=True
             Close Force
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
             CONTINUE
