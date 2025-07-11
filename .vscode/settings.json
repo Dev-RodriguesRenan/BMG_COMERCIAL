@@ -15,6 +15,7 @@
         "**/__pycache__": true,
         "**/*.html": true,
         "**/*.log": true,
-        "**/*.xml": true
+        "**/*.xml": true,
+        "**/.ruff_cache": true,
     }
 }

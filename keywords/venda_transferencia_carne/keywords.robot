@@ -44,7 +44,7 @@ Fill Forms in Transferencia de Carne
         Log    Press TAB ${counter}    
         Press Special Key    TAB
     END
-    # Filal: digitar -2 para limar <enter>, e -1 <enter> para selecionar todas as filiais.
+    # Filal: digitar -2 para limpar <enter>, e -1 <enter> para selecionar todas as filiais.
     With Keys Write Text    -2
     Press Enter
     With Keys Write Text    -1
