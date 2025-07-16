@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import schedule
@@ -39,14 +40,18 @@ def run_verificator_update():
 
 
 if __name__ == "__main__":
+    print("Starting main script...")
+    # Execute the keep session script
+    time.sleep(5)
+    # os.system("configs\\keep_session.bat")
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
         elif sys.argv[1] == "--cases":
             run_all_cases()
         elif sys.argv[1] == "--debug":
-            print("Running file in debug mode!! awaiting 10 seconds")
-            time.sleep(10)
+            print("Running file in debug mode!! awaiting 5 seconds")
+            time.sleep(5)
             run_file(updater_path)
             run_all_cases()
         else:
