@@ -3,15 +3,17 @@ import time
 import schedule
 import subprocess
 
+BASE_PATH = "C:/Users/Administrator/Downloads/BMG_COMERCIAL"
+
 files = [
-    "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/inventario_industria/main.robot",
-    "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/relatorio_carne/main.robot",
-    "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/vendas_transferencia_carnes/main.robot",
+    f"{BASE_PATH}/suites/inventario_industria/main.robot",
+    f"{BASE_PATH}/suites/relatorio_carne/main.robot",
+    f"{BASE_PATH}/suites/vendas_transferencia_carnes/main.robot",
 ]
-updater_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/suites/updater/main.robot"
-python_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python"
-verificator_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/verificator.py"
-excel_executor_path = "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/excel_handler.py"
+updater_path = f"{BASE_PATH}/suites/updater/main.robot"
+python_path = f"{BASE_PATH}/venv/Scripts/python"
+verificator_path = f"{BASE_PATH}/verificator.py"
+excel_executor_path = f"{BASE_PATH}/excel_handler.py"
 
 
 def run_file(file_path):
@@ -43,13 +45,15 @@ if __name__ == "__main__":
         elif sys.argv[1] == "--cases":
             run_all_cases()
         elif sys.argv[1] == "--debug":
+            print("Running file in debug mode!! awaiting 10 seconds")
+            time.sleep(10)
             run_file(updater_path)
             run_all_cases()
         else:
             print("Invalid argument. Use 'updater' or '--debug'.")
             sys.exit(1)
     else:
-        print("Waiting hours to start...")
+        print("Waiting hours to start... 06h00")
         # Verifica e atualiza o sistema caso necessário
         schedule.every().day.at("06:00").do(run_file, updater_path)
         # Loop para fechar o updater caso abra no meio da execução

@@ -63,7 +63,7 @@ Além disso, o sistema agrupa os arquivos extraídos, consolida os dados em plan
 
 1. Ative o ambiente virtual:
     ```shell
-    cd c:\Users\PCVJ\Desktop\BMG_COMERCIAL
+    cd c:\Users\YOUR_USER\YOUR_FOLDER\YOUR_WORKDIRECTORY
     venv\Scripts\activate
     ```
 2. Execute o script principal:

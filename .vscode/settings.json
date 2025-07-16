@@ -1,9 +1,9 @@
 {
     // Define o interpretador Python do ambiente virtual
-    "robot.python.executable": "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Scripts/python.exe",
+    "robot.python.executable": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Scripts/python.exe",
     // Define as variáveis de ambiente, se necessário
     "robot.python.env": {
-        "PYTHONPATH": "C:/Users/PCVJ/Desktop/BMG_COMERCIAL/venv/Lib/site-packages"
+        "PYTHONPATH": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Lib/site-packages"
     },
     // Configura o formatador padrão para arquivos do Robot Framework
     "[robotframework]": {
@@ -17,5 +17,18 @@
         "**/*.log": true,
         "**/*.xml": true,
         "**/.ruff_cache": true,
-    }
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnSave": true,
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultColorDecorators": "never",
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": "off",
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    // "terminal.integrated.defaultProfile.windows": "Git Bash"
 }

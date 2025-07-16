@@ -2,6 +2,7 @@ import os
 import pyautogui
 import pywinauto
 
+pyautogui.FAILSAFE = False
 
 def press_keys_simultaneously(k1, k2):
     pyautogui.hotkey(k1, k2)

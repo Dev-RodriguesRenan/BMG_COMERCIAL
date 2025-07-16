@@ -8,7 +8,7 @@ from credentials import email_credentials
 from utils_handler import get_current_date, move_files_to_bkp_folder
 
 # Definindo o caminho base para os documentos
-BASE_DOCUMENTS = Path("C:\\Users\\PCVJ\\Documents")
+BASE_DOCUMENTS = Path("C:\\Users\\Administrator\\Documents")
 BASE_CARNES = os.path.join(BASE_DOCUMENTS, "carnes")
 BASE_INVENTARIO_INDUSTRIA = os.path.join(BASE_DOCUMENTS, "inventario_industria")
 BASE_VENDAS_TRANSFERENCIA = os.path.join(BASE_DOCUMENTS, "vendas_transferencia")
@@ -54,6 +54,7 @@ def merge_excel_files(folder_path: str):
     file_path_consolidado = None
     try:
         all_data = pd.DataFrame()
+        file = ""
         for file in os.listdir(folder_path):
             if (
                 file.endswith(".xlsx")
@@ -64,12 +65,12 @@ def merge_excel_files(folder_path: str):
 
                 df = get_dataframe_filtered(file_path, file)
                 print(
-                    f"{time.strftime('%X')} >>> Arquivo {file_path} lido: {df.head(3)}"
+                    f"{time.strftime('%X')} >>> Arquivo {file_path} lido: {df.head(3) if df is not None else 'No data found'}"
                 )
                 print("-" * 100)
                 all_data = pd.concat([all_data, df], ignore_index=True)
                 # all_data.drop_duplicates(inplace=True)
-        if not all_data.empty:
+        if not all_data.empty and file:
             filename = f"{file.split('_')[-4]}_{file.split('_')[-3]}_{file.split('_')[-2]}_consolidado.xlsx"
             file_path_consolidado = os.path.join(folder_path, filename)
             all_data.to_excel(file_path_consolidado, index=False)
