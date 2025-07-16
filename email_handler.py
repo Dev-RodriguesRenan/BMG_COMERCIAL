@@ -1,11 +1,11 @@
 import os
-import time
 import smtplib
 from email import encoders
 from credentials import email_credentials
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
+from logger.logger import logger
 
 
 def send_email(
@@ -20,7 +20,7 @@ def send_email(
         from_email (str): email address of sender
         attachments (str, optional): path to attachments. Defaults to None.
     """
-    print(f"{time.strftime('%X')}>>> Sending email to {to_email}...")
+    logger.info(f"Sending email to {to_email}...")
     message = MIMEMultipart()
     message["From"] = from_email
     message["To"] = to_email
@@ -30,13 +30,13 @@ def send_email(
     if attachments:
         att = attach_files(attachments)
         message.attach(att)
-        print(f"{time.strftime('%X')}>>> Attachment {attachments} added to email.")
+        logger.info(f"Attachment {attachments} added to email.")
 
     with smtplib.SMTP("smtp.gmail.com", 587) as server:
         server.starttls()
         server.login(from_email, email_credentials["password"])
         server.sendmail(from_email, to_email, message.as_string())
-        print(f"{time.strftime('%X')}>>> Email sent sucessfully!!")
+        logger.info("Email sent sucessfully!!")
 
 
 def attach_files(attachments: str):

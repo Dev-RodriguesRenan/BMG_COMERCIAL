@@ -1,5 +1,11 @@
-pandas==2.3.1
-pyautogui==0.9.54
-python-dotenv==1.1.1
-pywinauto==0.6.9
-schedule==1.2.2
+pandas
+openpyxl
+pyautogui
+python-dotenv
+pywinauto
+schedule
+robotframework
+robotframework-sikulilibrary
+colorama
+# shutil
+# smtplib

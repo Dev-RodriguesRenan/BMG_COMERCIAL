@@ -1,14 +1,16 @@
 import os
 import shutil
 import pandas as pd
-import time
 from pathlib import Path
 from email_handler import send_email
 from credentials import email_credentials
 from utils_handler import get_current_date, move_files_to_bkp_folder
+from logger.logger import logger
 
 # Definindo o caminho base para os documentos
-BASE_DOCUMENTS = Path("C:\\Users\\Administrator\\Documents")
+BASE_DOCUMENTS = Path(
+    os.getenv("BASE_DOCUMENTS", os.path.expandvars("%USERPROFILE%/Documents"))
+)
 BASE_CARNES = os.path.join(BASE_DOCUMENTS, "carnes")
 BASE_INVENTARIO_INDUSTRIA = os.path.join(BASE_DOCUMENTS, "inventario_industria")
 BASE_VENDAS_TRANSFERENCIA = os.path.join(BASE_DOCUMENTS, "vendas_transferencia")
@@ -64,8 +66,8 @@ def merge_excel_files(folder_path: str):
                 file_path = os.path.join(folder_path, file)
 
                 df = get_dataframe_filtered(file_path, file)
-                print(
-                    f"{time.strftime('%X')} >>> Arquivo {file_path} lido: {df.head(3) if df is not None else 'No data found'}"
+                logger.debug(
+                    f"Arquivo {file_path} lido: {df.head(3) if df is not None else 'No data found'}"
                 )
                 print("-" * 100)
                 all_data = pd.concat([all_data, df], ignore_index=True)
@@ -76,7 +78,7 @@ def merge_excel_files(folder_path: str):
             all_data.to_excel(file_path_consolidado, index=False)
         return file_path_consolidado
     except Exception as e:
-        print(f"{time.strftime('%X')} >>> Erro ao processar os arquivos: {e}")
+        logger.error(f"Erro ao processar os arquivos: {e}")
         return None
 
 
@@ -92,17 +94,17 @@ def get_dataframe_filtered(file_path_dataframe: str, df_name: str):
     """
     if "inventario" in df_name.lower():
         print("-" * 100)
-        print(f"{time.strftime('%X')} >>> Lendo linhas do inventario")
+        logger.debug("Lendo linhas do inventario")
         print("-" * 100)
         return pd.read_excel(file_path_dataframe, header=3)
     if "carne" in df_name.lower():
         print("-" * 100)
-        print(f"{time.strftime('%X')} >>> Lendo linhas de carnes")
+        logger.debug("Lendo linhas de carnes")
         print("-" * 100)
         return pd.read_excel(file_path_dataframe, header=4)
     if "vendatransferencia" in df_name.lower():
         print("-" * 100)
-        print(f"{time.strftime('%X')} >>> Lendo linhas do vendas transferencia")
+        logger.debug("Lendo linhas do vendas transferencia")
         print("-" * 100)
         return pd.read_excel(file_path_dataframe, header=4)
 
@@ -112,8 +114,8 @@ def main():
         # gerar o arquivo consolidado de vendas
         filename = merge_excel_files(BASE_VENDAS_TRANSFERENCIA)
         if filename:
-            print(
-                f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Vendas/Transferências criado: {filename}"
+            logger.debug(
+                f"Arquivo consolidado de Relatório de Vendas/Transferências criado: {filename}"
             )
             # enviar arquivo para o e-mail
             for receiver in receivers:
@@ -128,8 +130,8 @@ def main():
         # gerar o arquivo consolidado de carnes
         filename = merge_excel_files(BASE_CARNES)
         if filename:
-            print(
-                f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Compra de Carne criado: {filename}"
+            logger.debug(
+                f"Arquivo consolidado de Relatório de Compra de Carne criado: {filename}"
             )
             # enviar arquivo para o e-mail
             for receiver in receivers:
@@ -144,8 +146,8 @@ def main():
         # gerar o arquivo consolidado de inventario
         filename = merge_excel_files(BASE_INVENTARIO_INDUSTRIA)
         if filename:
-            print(
-                f"{time.strftime('%X')} >>> Arquivo consolidado de Relatório de Inventário Indústria criado: {filename}"
+            logger.debug(
+                f"Arquivo consolidado de Relatório de Inventário Indústria criado: {filename}"
             )
             # enviar arquivo para o e-mail
             for receiver in receivers:
@@ -157,15 +159,11 @@ def main():
                     to_email=receiver,
                     attachments=filename,
                 )
-        print(
-            f"{time.strftime('%X')} >>> Todos os arquivos foram processados e enviados com sucesso."
-        )
+        logger.info("Todos os arquivos foram processados e enviados com sucesso.")
         # mover os arquivos para a pasta de backup
         to_do_bkp()
     except Exception as e:
-        print(
-            f"{time.strftime('%X')} >>> Erro ao processar os arquivos e realizar os envios: {e}"
-        )
+        logger.error(f"Erro ao processar os arquivos e realizar os envios: {e}")
 
 
 def to_do_bkp():

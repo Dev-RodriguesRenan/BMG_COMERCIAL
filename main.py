@@ -1,10 +1,13 @@
 import os
 import sys
 import time
+from dotenv import load_dotenv
 import schedule
 import subprocess
+from logger.logger import logger
 
-BASE_PATH = "C:/Users/Administrator/Downloads/BMG_COMERCIAL"
+load_dotenv()
+BASE_PATH = os.getenv("BASE_PATH", os.getcwd())
 
 files = [
     f"{BASE_PATH}/suites/inventario_industria/main.robot",
@@ -18,47 +21,48 @@ excel_executor_path = f"{BASE_PATH}/excel_handler.py"
 
 
 def run_file(file_path):
-    print(f"Running {file_path}")
+    logger.info(f"Running {file_path}")
     subprocess.run([python_path, "-m", "robot", "-d", "results", file_path])
-    print(f"Finished running {file_path}")
+    logger.info(f"Finished running {file_path}")
 
 
 def run_all_cases():
-    print("Running all cases!!")
+    logger.info("Running all cases!!")
     for file in files:
         run_file(file)
-    print("All cases finished running!!")
-    print("Running excel executor!!")
+    logger.info("All cases finished running!!")
+    logger.info("Running excel executor!!")
     subprocess.run([python_path, excel_executor_path])
-    print("Finished excel executor!!")
+    logger.info("Finished excel executor!!")
 
 
 def run_verificator_update():
-    print("Running verificator update!!")
+    logger.debug("Running verificator update!!")
     subprocess.run([python_path, verificator_path])
-    print("Finished running verificator update!!")
+    logger.debug("Finished running verificator update!!")
 
 
 if __name__ == "__main__":
-    print("Starting main script...")
+    logger.info("Starting main script...")
+    logger.info("Closing RDP...")
     # Execute the keep session script
-    time.sleep(5)
-    # os.system("configs\\keep_session.bat")
+    time.sleep(10)
+    os.system("configs\\keep_session.bat")
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
         elif sys.argv[1] == "--cases":
             run_all_cases()
         elif sys.argv[1] == "--debug":
-            print("Running file in debug mode!! awaiting 5 seconds")
+            logger.debug("Running file in debug mode!! awaiting 5 seconds")
             time.sleep(5)
             run_file(updater_path)
             run_all_cases()
         else:
-            print("Invalid argument. Use 'updater' or '--debug'.")
+            logger.error("Invalid argument. Use 'updater' or '--debug'.")
             sys.exit(1)
     else:
-        print("Waiting hours to start... 06h00")
+        logger.info("Waiting hours to start... 06h00")
         # Verifica e atualiza o sistema caso necessário
         schedule.every().day.at("06:00").do(run_file, updater_path)
         # Loop para fechar o updater caso abra no meio da execução
