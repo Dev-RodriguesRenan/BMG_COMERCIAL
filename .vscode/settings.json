@@ -13,10 +13,9 @@
         "**/Sikuli_*": true,
         "**/sikuliximage*": true,
         "**/__pycache__": true,
-        "**/*.html": true,
-        "**/*.log": true,
+        // "**/*.html": true,
+        // "**/*.log": true,
         "**/*.xml": true,
         "**/.ruff_cache": true,
     },
-    
 }

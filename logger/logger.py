@@ -7,7 +7,7 @@ import colorama
 # Configuração do diretório base para logs
 BASE_DIR_LOGS = "/logs"
 if not os.path.exists(BASE_DIR_LOGS):
-    os.makedirs(BASE_DIR_LOGS, exist_ok=True)
+    os.makedirs(BASE_DIR_LOGS)
 
 # definindo as cores
 LOG_COLORS = {

@@ -1,10 +1,9 @@
-@echo Iniciando execução dos testes Robot Framework
+@echo Iniciando execução dos Scripts
 @echo ----------------------------------------------
-start "" cmd /k "call C:\Users\Administrator\Downloads\BMG_COMERCIAL\BMG_COMERCIAL\venv\Scripts\python -m robot -d results suites/inventario_industria/main.robot"
-start "" cmd /k "call C:\Users\Administrator\Downloads\BMG_COMERCIAL\BMG_COMERCIAL\venv\Scripts\python -m robot -d results suites/relatorio_carne/main.robot"
-start "" cmd /k "call C:\Users\Administrator\Downloads\BMG_COMERCIAL\BMG_COMERCIAL\venv\Scripts\python -m robot -d results suites/vendas_transferencia_carnes/main.robot"
+cd C:\Users\Administrator\Downloads\BMG_COMERCIAL
+venv\Scripts\python.exe main.py 
 @echo ----------------------------------------------
-@echo Testes Robot Framework finalizados
+@echo Scripts executados com sucesso!
 @echo ----------------------------------------------
 @echo Pressione qualquer tecla para sair...
 PAUSE > NUL
