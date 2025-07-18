@@ -2,8 +2,8 @@ import os
 import sys
 import time
 from dotenv import load_dotenv
-import schedule
 import subprocess
+import threading
 from logger.logger import logger
 
 load_dotenv()
@@ -27,8 +27,6 @@ def run_file(file_path):
 
 
 def run_all_cases():
-    logger.info("Running updater first!!")
-    run_file(updater_path)
     logger.info("Running all cases!!")
     for file in files:
         run_file(file)
@@ -49,7 +47,7 @@ if __name__ == "__main__":
     logger.info("Closing RDP...")
     # Execute the keep session script
     time.sleep(10)
-    os.system("configs\\keep_session.bat")
+    # os.system("configs\\keep_session.bat")
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
@@ -62,11 +60,18 @@ if __name__ == "__main__":
     else:
         logger.info("Waiting hours to start... 06h00")
 
-        # Loop para fechar o updater caso abra no meio da execução
-        schedule.every().day.at("06:00").do(run_verificator_update)
         # Executa todos os casos de teste diariamente às 06:00
-        schedule.every().day.at("06:00").do(run_all_cases)
-
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
+        logger.info("Running updater first!!")
+        updater = threading.Thread(target=run_file, args=(updater_path,))
+        updater.start()
+        updater.join()
+        logger.info("Updater finished running!!")
+        logger.info("Running all cases now!!")
+        run_all = threading.Thread(target=run_all_cases)
+        run_all.start()
+        # verificator = threading.Thread(target=run_verificator_update)
+        # verificator.start()
+        run_all.join()
+        # verificator.join()
+        logger.info("All tasks completed successfully!")
+        sys.exit(0)

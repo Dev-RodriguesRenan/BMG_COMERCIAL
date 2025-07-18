@@ -50,6 +50,7 @@ file_handler = logging.FileHandler(
 console_handler.setFormatter(HandlerFormatter(*LOG_FORMAT))
 console_handler.setLevel(logging.DEBUG)
 file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(HandlerFormatter(*LOG_FORMAT))
 
 # adicionando os handlers ao logger
 logger.addHandler(console_handler)
