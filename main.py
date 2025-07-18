@@ -66,7 +66,10 @@ if __name__ == "__main__":
         # Executa todos os casos de teste diariamente às 06:00
         logger.info("Running all cases now!!")
         schedule.every(1).days.at("06:00").do(run_all_cases)
-        logger.info("All tasks completed successfully!")
         while True:
             schedule.run_pending()
+            print(
+                f"{time.strftime('%X')} - Waiting for the next scheduled task...",
+                end="\r",
+            )
             time.sleep(1)
