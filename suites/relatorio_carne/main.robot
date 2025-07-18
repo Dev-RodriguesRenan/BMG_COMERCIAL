@@ -22,6 +22,7 @@ Relatorio de Carne
         EXCEPT    AS     ${error}
             Log    \nErro ao executar o caso de teste em: ${base}\n    level=DEBUG    console=True
             Log    \nException: ${error}\n    level=DEBUG    console=True
+            Screenshot    Erro_Relatorio_De_Carne_${base}
             Close Force
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
             CONTINUE

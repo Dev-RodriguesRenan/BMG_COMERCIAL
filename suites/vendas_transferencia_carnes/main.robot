@@ -21,6 +21,7 @@ Vendas Transferencia de Carnes
         EXCEPT     AS     ${error}
             Log    \nErro ao executar o caso de teste em: ${base}\n    level=DEBUG    console=True
             Log    \nException: ${error}\n    level=DEBUG    console=True
+            Screenshot    Erro_Transferencia_Carne_${base}
             Close Force
             Sleep    10s    Aguardando 10 segundos para o acessar novamente o sistema do FJ Frigo
             CONTINUE

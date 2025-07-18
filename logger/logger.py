@@ -3,9 +3,11 @@ import logging
 import os
 import sys
 import colorama
+from dotenv import load_dotenv
 
+load_dotenv()
 # Configuração do diretório base para logs
-BASE_DIR_LOGS = "/logs"
+BASE_DIR_LOGS = os.path.join(os.getenv("BASE_PATH", os.getcwd()), "logs")
 if not os.path.exists(BASE_DIR_LOGS):
     os.makedirs(BASE_DIR_LOGS)
 
@@ -35,7 +37,7 @@ class HandlerFormatter(logging.Formatter):
 
 
 # configurando o logger
-logger = logging.getLogger("app")
+logger = logging.getLogger(f"app_{__file__}")
 logger.setLevel(logging.DEBUG)
 
 # criando handlers para console e arquivo
