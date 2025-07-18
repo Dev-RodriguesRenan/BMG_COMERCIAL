@@ -3,7 +3,8 @@ import sys
 import time
 from dotenv import load_dotenv
 import subprocess
-import threading
+
+import schedule
 from logger.logger import logger
 
 load_dotenv()
@@ -52,6 +53,8 @@ if __name__ == "__main__":
         if sys.argv[1] == "--updater":
             run_file(updater_path)
         elif sys.argv[1] == "--debug":
+            logger.debug("Debug mode activated. Running updater file.")
+            run_file(updater_path)
             logger.debug("Running file in debug mode!! awaiting 5 seconds")
             run_all_cases()
         else:
@@ -61,17 +64,9 @@ if __name__ == "__main__":
         logger.info("Waiting hours to start... 06h00")
 
         # Executa todos os casos de teste diariamente às 06:00
-        logger.info("Running updater first!!")
-        updater = threading.Thread(target=run_file, args=(updater_path,))
-        updater.start()
-        updater.join()
-        logger.info("Updater finished running!!")
         logger.info("Running all cases now!!")
-        run_all = threading.Thread(target=run_all_cases)
-        run_all.start()
-        # verificator = threading.Thread(target=run_verificator_update)
-        # verificator.start()
-        run_all.join()
-        # verificator.join()
+        schedule.every(1).days.at("06:00").do(run_all_cases)
         logger.info("All tasks completed successfully!")
-        sys.exit(0)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
