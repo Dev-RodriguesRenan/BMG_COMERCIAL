@@ -1,5 +1,6 @@
 import os
 import shutil
+from dotenv import load_dotenv
 import pandas as pd
 from pathlib import Path
 from email_handler import send_email
@@ -7,6 +8,7 @@ from credentials import email_credentials
 from utils_handler import get_current_date, move_files_to_bkp_folder
 from logger.logger import logger
 
+load_dotenv()
 # Definindo o caminho base para os documentos
 BASE_DOCUMENTS = Path(
     os.getenv("BASE_DOCUMENTS", os.path.expandvars("%USERPROFILE%/Documents"))
