@@ -37,7 +37,7 @@ class HandlerFormatter(logging.Formatter):
 
 
 # configurando o logger
-logger = logging.getLogger(f"app_{__file__}")
+logger = logging.getLogger(os.path.basename(__file__))
 logger.setLevel(logging.DEBUG)
 
 # criando handlers para console e arquivo

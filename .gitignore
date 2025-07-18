@@ -7,5 +7,7 @@ sikuli_captured
 Sikuli_*
 results
 result
+logs
 tests
+test
 .ruff*  
