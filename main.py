@@ -27,6 +27,8 @@ def run_file(file_path):
 
 
 def run_all_cases():
+    logger.info("Running updater first!!")
+    run_file(updater_path)
     logger.info("Running all cases!!")
     for file in files:
         run_file(file)
@@ -51,24 +53,19 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
-        elif sys.argv[1] == "--cases":
-            run_all_cases()
         elif sys.argv[1] == "--debug":
             logger.debug("Running file in debug mode!! awaiting 5 seconds")
-            time.sleep(5)
-            run_file(updater_path)
             run_all_cases()
         else:
             logger.error("Invalid argument. Use 'updater' or '--debug'.")
             sys.exit(1)
     else:
         logger.info("Waiting hours to start... 06h00")
-        # Verifica e atualiza o sistema caso necessário
-        schedule.every().day.at("06:00").do(run_file, updater_path)
+
         # Loop para fechar o updater caso abra no meio da execução
-        schedule.every().day.at("06:10").do(run_verificator_update)
-        # Executa todos os casos de teste diariamente às 06:10
-        schedule.every().day.at("06:10").do(run_all_cases)
+        schedule.every().day.at("06:00").do(run_verificator_update)
+        # Executa todos os casos de teste diariamente às 06:00
+        schedule.every().day.at("06:00").do(run_all_cases)
 
         while True:
             schedule.run_pending()
