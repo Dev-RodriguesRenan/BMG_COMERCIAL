@@ -17,5 +17,6 @@
         // "**/*.log": true,
         "**/*.xml": true,
         "**/.ruff_cache": true,
+        "**/.pytest_cache": true,
     },
 }

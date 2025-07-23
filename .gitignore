@@ -11,3 +11,4 @@ logs
 tests
 test
 .ruff*  
+.pytest_cache

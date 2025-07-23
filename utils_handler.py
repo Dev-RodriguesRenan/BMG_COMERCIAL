@@ -3,6 +3,8 @@ import os
 import time
 import shutil
 
+import pyautogui
+
 
 def check_if_the_day_is_useful():
     """Check if the current day is a useful day for processing.
@@ -103,7 +105,7 @@ def move_files_to_bkp_folder(file_path, bkp_folder):
         )
 
 
-# def screenshot(filename):
-#     pyautogui.screenshot(
-#         f"logs/{filename}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
-#     )
+def screenshot(filename):
+    pyautogui.screenshot(
+        f"logs/{filename}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+    )
