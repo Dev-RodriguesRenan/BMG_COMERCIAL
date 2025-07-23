@@ -1,6 +1,7 @@
 pandas
 openpyxl
 pyautogui
+pillow
 python-dotenv
 pywinauto
 schedule
