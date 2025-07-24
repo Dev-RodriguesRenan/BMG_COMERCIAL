@@ -43,12 +43,16 @@ def run_verificator_update():
     logger.debug("Finished running verificator update!!")
 
 
-if __name__ == "__main__":
-    logger.info("Starting main script...")
-    logger.info("Closing RDP...")
+def keep_session():
+    logger.debug("Closing RDP, to keep session alive...")
     # Execute the keep session script
     time.sleep(10)
-    # os.system("configs\\keep_session.bat")
+    os.system("configs\\keep_session.bat")
+
+
+if __name__ == "__main__":
+    logger.info("Starting main script...")
+
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
