@@ -3,7 +3,7 @@ import sys
 import time
 from dotenv import load_dotenv
 import subprocess
-
+import datetime
 import schedule
 from logger.logger import logger
 
@@ -28,6 +28,9 @@ def run_file(file_path):
 
 
 def run_all_cases():
+    if datetime.datetime.weekday() in [5, 6]:  # Saturday and Sunday
+        logger.info("It's weekend, skipping test execution.")
+        return
     logger.info("Running all cases!!")
     for file in files:
         run_file(file)
