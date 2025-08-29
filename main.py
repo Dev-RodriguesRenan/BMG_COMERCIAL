@@ -28,7 +28,7 @@ def run_file(file_path):
 
 
 def run_all_cases():
-    if datetime.datetime.weekday() in [5, 6]:  # Saturday and Sunday
+    if datetime.datetime.now().weekday() in [5, 6]:  # Saturday and Sunday
         logger.info("It's weekend, skipping test execution.")
         return
     logger.info("Running all cases!!")
