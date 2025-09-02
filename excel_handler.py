@@ -127,6 +127,19 @@ def main():
                     to_email=receiver,
                     attachments=filename,
                 )
+        else:
+            logger.warning(
+                "Arquivo consolidado de Relatório de Compra de Carne não foi criado."
+            )
+            # enviar arquivo para o e-mail
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Compra de Carne Consolidado",
+                    body=message.format(
+                        "Não foi possivel gerar o Relatório de Compra de Carne",
+                    ),
+                    to_email=receiver,
+                )
         # gerar o arquivo consolidado de carnes
         filename = merge_excel_files(BASE_CARNES)
         if filename:
@@ -143,6 +156,19 @@ def main():
                     to_email=receiver,
                     attachments=filename,
                 )
+        else:
+            logger.warning(
+                "Arquivo consolidado de Relatório de Compra de Carne não foi criado."
+            )
+            # enviar arquivo para o e-mail
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Compra de Carne Consolidado",
+                    body=message.format(
+                        "Não foi possivel gerar o Relatório de Compra de Carne",
+                    ),
+                    to_email=receiver,
+                )
         # gerar o arquivo consolidado de inventario
         filename = merge_excel_files(BASE_INVENTARIO_INDUSTRIA)
         if filename:
@@ -158,6 +184,19 @@ def main():
                     ),
                     to_email=receiver,
                     attachments=filename,
+                )
+        else:
+            logger.warning(
+                "Arquivo consolidado de Relatório de Inventário Indústria não foi criado."
+            )
+            # enviar arquivo para o e-mail
+            for receiver in receivers:
+                send_email(
+                    subject="Relatório de Inventário Indústria Consolidado",
+                    body=message.format(
+                        "Não foi possivel gerar o Relatório de Inventário Indústria",
+                    ),
+                    to_email=receiver,
                 )
         logger.info("Todos os arquivos foram processados e enviados com sucesso.")
         # mover os arquivos para a pasta de backup
