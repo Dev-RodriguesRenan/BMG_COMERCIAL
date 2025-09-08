@@ -135,9 +135,7 @@ def main():
             for receiver in receivers:
                 send_email(
                     subject="Relatório de Compra de Carne Consolidado",
-                    body=message.format(
-                        "Não foi possivel gerar o Relatório de Compra de Carne",
-                    ),
+                    body="Não foi possivel gerar o Relatório de Compra de Carne",
                     to_email=receiver,
                 )
         # gerar o arquivo consolidado de carnes
@@ -164,9 +162,7 @@ def main():
             for receiver in receivers:
                 send_email(
                     subject="Relatório de Compra de Carne Consolidado",
-                    body=message.format(
-                        "Não foi possivel gerar o Relatório de Compra de Carne",
-                    ),
+                    body="Não foi possivel gerar o Relatório de Compra de Carne",
                     to_email=receiver,
                 )
         # gerar o arquivo consolidado de inventario
@@ -193,9 +189,7 @@ def main():
             for receiver in receivers:
                 send_email(
                     subject="Relatório de Inventário Indústria Consolidado",
-                    body=message.format(
-                        "Não foi possivel gerar o Relatório de Inventário Indústria",
-                    ),
+                    body="Não foi possivel gerar o Relatório de Inventário Indústria",
                     to_email=receiver,
                 )
         logger.info("Todos os arquivos foram processados e enviados com sucesso.")
