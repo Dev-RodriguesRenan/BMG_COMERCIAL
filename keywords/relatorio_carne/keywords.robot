@@ -8,18 +8,21 @@ Resource        ../share.robot
 *** Variables ***
 *** Keywords ***
 Select Menu Relatorio de Carne
+    Wait Until Screen Contain    relatorios_icon.png   10
+    Key Down    ALT 
     # Clica em relatorios
-    Wait Until Screen Contain    relatorios_icon.png    30
-    Click    relatorios_icon.png
+    Press Special Key    NUM3
+    Sleep    1
     # Clica em faturamento
-    Wait Until Screen Contain    faturamento_icon.png    30
-    Click    faturamento_icon.png
-    # Clica em apuração
-    Wait Until Screen Contain    compras_entradas.png    30
-    Click    compras_entradas.png
-    # Clica em inventario de industria
-    Wait Until Screen Contain    compras_carnes.png    30
-    Click    compras_carnes.png
+    Press Special Key    NUM2
+    Sleep    1
+    # Clica em compras (entrada)
+    Press Special Key    NUM1
+    Sleep    1
+    # Clica em compras carnes
+    Press Special Key    NUM4
+    Sleep    1
+    Key Up    ALT
     Sleep    3s
 Fill Forms in Relatorio de Carne
     # Preenche o campo com a data do dia primeiro deste mês

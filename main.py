@@ -75,11 +75,17 @@ if __name__ == "__main__":
         # Executa todos os casos de teste diariamente às 06:00
         logger.info("Running all cases now!!")
         schedule.every(1).days.at("06:00").do(run_all_cases)
+        seconds = 0
         while True:
             schedule.run_pending()
             print(
                 f"{time.strftime('%X')} - Waiting for the next scheduled task...",
                 end="\r",
             )
-            pyautogui.moveTo(random.randint(0, 500), random.randint(0, 500))
+            if seconds > 59:
+                pyautogui.moveTo(random.randint(0, 10), random.randint(0, 500))
+                seconds = 0
+                print("mouse it was moved!!")
+            else:
+                seconds += 1
             time.sleep(1)

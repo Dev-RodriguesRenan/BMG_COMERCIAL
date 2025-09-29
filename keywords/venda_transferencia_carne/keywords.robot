@@ -5,18 +5,22 @@ Resource    ../keywords.robot
 Library         ../../utils_handler.py
 *** Keywords ***
 Select Menu Transferencia de Carne
+    Wait Until Screen Contain    relatorios_icon.png   10
+    Key Down    ALT
     # Clica em relatorios
-    Wait Until Screen Contain    relatorios_icon.png    30
-    Click    relatorios_icon.png
+    Press Special Key    NUM3
+    Sleep    1
     # Clica em faturamento
-    Wait Until Screen Contain    faturamento_icon.png    30
-    Click    faturamento_icon.png
+    Press Special Key    NUM2
+    Sleep    1
     # Clica em vendas
-    Wait Until Screen Contain    vendas_icon.png    30
-    Click    vendas_icon.png
+    Press Special Key    NUM2
+    Sleep    1
     # Clica em venda transferencia de carne
-    Wait Until Screen Contain    vtdc_icon.png    30
-    Click    vtdc_icon.png
+    Press Special Key    NUM1
+    Sleep    1
+    Key Up    ALT
+    
     Sleep    3s
 Fill Forms in Transferencia de Carne
     ${DATA_INICIAL}    Take Last Business Day
