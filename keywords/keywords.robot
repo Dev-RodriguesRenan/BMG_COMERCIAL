@@ -19,7 +19,9 @@ Login in FJ Frigo
     Select Base in FJ Frigo    ${base}
     Sleep    3s
     # Preenche o login e senha
-    Fill Credentials in FJ Frigo 
+    Fill Credentials in FJ Frigo
+    # Verifica se a janela de erros de atualização apareceu
+    Check If Updated Errors 
 Select Base in FJ Frigo
     [Arguments]    ${base}
     Click    banco_de_dados.png    91    08
@@ -112,4 +114,10 @@ Procurar Icone
             BREAK
         END
         Log    ${icon} não encontrado    console=True
+    END
+
+Check If Updated Errors
+    ${is_updated}    Exists    is_updated.png    7
+    IF    ${is_updated} == True
+        Press Enter
     END

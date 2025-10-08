@@ -81,4 +81,5 @@ if __name__ == "__main__":
                 end="\r",
             )
             pyautogui.press("numlock")
+            print("press key numlock", end="\r")
             time.sleep(1)
