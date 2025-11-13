@@ -6,4 +6,4 @@ Load Images
 *** Variables ***
 ${IMAGES_PATH}    ${EXECDIR}/images
 ${LOGIN}    julio.franca
-${PASSWORD}    franca@2023.
+${PASSWORD}    franca@2025.
