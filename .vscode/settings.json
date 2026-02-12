@@ -1,13 +1,7 @@
 {
-    // Define o interpretador Python do ambiente virtual
-    "robot.python.executable": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Scripts/python.exe",
-    // Define as variáveis de ambiente, se necessário
-    "robot.python.env": {
-        "PYTHONPATH": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Lib/site-packages"
-    },
     // Configura o formatador padrão para arquivos do Robot Framework
     "[robotframework]": {
-        "editor.defaultFormatter": "robocorp.robotframework-lsp"
+        "editor.defaultFormatter": "d-biehl.robotcode"
     },
     "files.exclude": {
         "**/Sikuli_*": true,
@@ -19,4 +13,6 @@
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,
     },
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
 }
