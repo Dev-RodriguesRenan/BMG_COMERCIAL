@@ -1,0 +1,5 @@
+[tool.taskipy.tasks]
+format = "ruff format . && ruff check ."
+run = "python main.py --debug"
+update = "python main.py --update"
+commit = "git add . && git commit -m"

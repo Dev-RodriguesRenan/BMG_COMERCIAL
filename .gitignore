@@ -12,3 +12,4 @@ tests
 test
 .ruff*  
 .pytest_cache
+images.sikuli
