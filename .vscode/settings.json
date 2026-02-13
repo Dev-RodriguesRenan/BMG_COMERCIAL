@@ -1,22 +1,27 @@
 {
-    // Define o interpretador Python do ambiente virtual
-    "robot.python.executable": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Scripts/python.exe",
-    // Define as variáveis de ambiente, se necessário
-    "robot.python.env": {
-        "PYTHONPATH": "C:/Users/Administrator/Downloads/BMG_COMERCIAL/venv/Lib/site-packages"
-    },
-    // Configura o formatador padrão para arquivos do Robot Framework
-    "[robotframework]": {
-        "editor.defaultFormatter": "robocorp.robotframework-lsp"
-    },
-    "files.exclude": {
-        "**/Sikuli_*": true,
-        "**/sikuliximage*": true,
-        "**/__pycache__": true,
-        // "**/*.html": true,
-        // "**/*.log": true,
-        "**/*.xml": true,
-        "**/.ruff_cache": true,
-        "**/.pytest_cache": true,
-    },
+  // Configura o formatador padrão para arquivos do Robot Framework
+  "[robotframework]": {
+    "editor.defaultFormatter": "d-biehl.robotcode"
+  },
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.defaultColorDecorators": "never",
+    "editor.formatOnType": true,
+    "editor.wordBasedSuggestions": "off"
+  },
+  "files.exclude": {
+    "**/Sikuli_*": true,
+    "**/sikuliximage*": true,
+    "**/__pycache__": true,
+    "**/*.xml": true,
+    "**/.ruff_cache": true,
+    "**/.pytest_cache": true
+  },
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 5000,
+  "editor.formatOnSave": true,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

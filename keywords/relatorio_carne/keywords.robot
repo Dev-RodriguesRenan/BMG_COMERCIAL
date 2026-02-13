@@ -11,16 +11,16 @@ Select Menu Relatorio de Carne
     Wait Until Screen Contain    relatorios_icon.png   10
     Key Down    ALT 
     # Clica em relatorios
-    Press Special Key    NUM3
+    Press Special Key    3
     Sleep    1
     # Clica em faturamento
-    Press Special Key    NUM2
+    Press Special Key    2
     Sleep    1
     # Clica em compras (entrada)
-    Press Special Key    NUM1
+    Press Special Key    1
     Sleep    1
     # Clica em compras carnes
-    Press Special Key    NUM4
+    Press Special Key    4
     Sleep    1
     Key Up    ALT
     Sleep    3s
