@@ -7,3 +7,4 @@ Load Images
 ${IMAGES_PATH}    ${EXECDIR}/images
 ${LOGIN}    julio.franca
 ${PASSWORD}    franca@2025.
+${FJ_PATH}    C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\fjfrigo.lnk

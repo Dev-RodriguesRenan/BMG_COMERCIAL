@@ -42,10 +42,10 @@ Select Base in FJ Frigo
        Log    Escolhendo a base default: BMG Central    console=True
     END
     Press Enter
-    Sleep    1.5s
+    Sleep    2s
     Press Special Key    TAB
 Fill Credentials in FJ Frigo
-    Sleep    1.5s
+    Sleep    2s
     Press Special Key    TAB
     # verifica se o login e senha estão preenchidos
     ${is_loged}=    Exists    login.png    5
@@ -57,7 +57,7 @@ Fill Credentials in FJ Frigo
     ${is_loged}=    Exists    password.png    5
     IF    '${is_loged}' == 'False'
         Log    Preechendo senha do usuario: ${PASSWORD}    console=True
-        With Keys Write Text    ${PASSWORD}
+        Type With Modifiers    ${PASSWORD}
     END
     Press Enter
     Press Enter

@@ -39,20 +39,12 @@ def run_all_cases():
     logger.info("Running excel executor!!")
     subprocess.run([python_path, excel_executor_path])
     logger.info("Finished excel executor!!")
-
+    exit()
 
 def run_verificator_update():
     logger.debug("Running verificator update!!")
     subprocess.run([python_path, verificator_path])
     logger.debug("Finished running verificator update!!")
-
-
-def keep_session():
-    logger.debug("Closing RDP, to keep session alive...")
-    # Execute the keep session script
-    time.sleep(10)
-    os.system("configs\\keep_session.bat")
-
 
 if __name__ == "__main__":
     logger.info("Starting main script...")
