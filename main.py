@@ -41,7 +41,7 @@ def run_all_cases():
     logger.info("Running excel executor!!")
     subprocess.run([python_path, excel_executor_path])
     logger.info("Finished excel executor!!")
-    exit()
+    sys.exit()
 
 
 def run_verificator_update():
