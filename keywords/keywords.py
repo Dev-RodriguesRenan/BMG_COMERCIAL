@@ -28,9 +28,10 @@ def switch_window_fjFrigo():
         if "Controle administrativo" in window.window_text():
             window.set_focus()
             break
-        
+
+
 def switch_window_login():
-    list_windows:list[UIAWrapper] = pywinauto.Desktop(backend="uia").windows()
+    list_windows: list[UIAWrapper] = pywinauto.Desktop(backend="uia").windows()
     for window in list_windows:
         if "login" in window.window_text().lower():
             window.set_focus()
@@ -49,5 +50,6 @@ def execute_kill():
         print(f"Error: {e}")
         pass
 
-def start(filepath:str):
+
+def start(filepath: str):
     os.startfile(filepath)

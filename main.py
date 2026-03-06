@@ -25,6 +25,8 @@ excel_executor_path = f"{BASE_PATH}/excel_handler.py"
 def run_file(file_path):
     logger.info(f"Running {file_path}")
     subprocess.run([python_path, "-m", "robot", "-d", "results", file_path])
+    # garantindo que matou os processos java do robot e do fj
+    os.system("taskkill /f /im java*")
     logger.info(f"Finished running {file_path}")
 
 
@@ -41,10 +43,12 @@ def run_all_cases():
     logger.info("Finished excel executor!!")
     exit()
 
+
 def run_verificator_update():
     logger.debug("Running verificator update!!")
     subprocess.run([python_path, verificator_path])
     logger.debug("Finished running verificator update!!")
+
 
 if __name__ == "__main__":
     logger.info("Starting main script...")
