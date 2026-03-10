@@ -10,7 +10,7 @@
         // "**/*.html": true,
         "**/*.log": true,
         "**/logs/*": true,
-        "**/venv": true,
+        // "**/venv": true,
         "**/*.xml": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,

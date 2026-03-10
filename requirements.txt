@@ -7,6 +7,7 @@ pywinauto
 schedule
 robotframework
 robotframework-sikulilibrary
+robotframework-robocop
 colorama
 # shutil
 # smtplib
