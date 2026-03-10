@@ -3,7 +3,6 @@ Library         SikuliLibrary
 Library        ../../utils_handler.py
 Library         ../keywords/keywords.py
 Resource        ../keywords.robot
-Resource        ../share.robot
 
 *** Variables ***
 *** Keywords ***

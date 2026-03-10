@@ -6,12 +6,9 @@ Resource        ../share.robot
 
 *** Keywords ***
 Open FJ Frigo
-    Press Key    win
-    Sleep    3s
-
-    With Keys Write Text    fjfrigo
+    Start App    ${FJ_PATH}
     Sleep    5s
-    Press Enter
+    
 Verify And Update FJ Frigo
     Wait Until Screen Contain    fj_banner.png    30
     Sleep    15s    Aguarda para caso apareça a tela de update

@@ -1,16 +1,13 @@
 *** Settings ***
 Library         SikuliLibrary
 Library         keywords.py
-Resource        keywords.robot
 Resource        share.robot
 
 *** Keywords ***
 # Acessa o sistema da FJ Frigo 
 Login in FJ Frigo
     [Arguments]    ${base}
-    Press Key    win
-    Sleep    2s
-    With Keys Write Text    fjfrigo
+    Start App    ${FJ_PATH}
     Sleep    5s 
     Press Enter
     Wait Until Screen Contain    fj_banner.png    60
@@ -76,7 +73,7 @@ Save XLSX
     Sleep    2s
     Press Enter
     Wait Until Screen Contain    excel_is_opened.png    10
-    Alt F4
+    End Task    EXCEL.EXE    
 
 # Fecha o sistema da FJ Frigo
 Close FJ Frigo

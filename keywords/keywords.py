@@ -49,7 +49,12 @@ def execute_kill():
     except Exception as e:
         print(f"Error: {e}")
         pass
+def end_task(task:str):
+    try:
+        os.system(f"taskkill /F /IM {task}")
+    except Exception as e:
+        print(f"Error: {e}")
+        pass
 
-
-def start(filepath: str):
+def start_app(filepath: str):
     os.startfile(filepath)
