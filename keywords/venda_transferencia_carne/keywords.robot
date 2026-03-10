@@ -8,16 +8,16 @@ Select Menu Transferencia de Carne
     Wait Until Screen Contain    relatorios_icon.png   10
     Key Down    ALT
     # Clica em relatorios
-    Press Special Key    NUM3
+    Press Key    3
     Sleep    1
     # Clica em faturamento
-    Press Special Key    NUM2
+    Press Key    2
     Sleep    1
     # Clica em vendas
-    Press Special Key    NUM2
+    Press Key    2
     Sleep    1
     # Clica em venda transferencia de carne
-    Press Special Key    NUM1
+    Press Key    1
     Sleep    1
     Key Up    ALT
     

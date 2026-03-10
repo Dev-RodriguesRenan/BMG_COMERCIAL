@@ -11,16 +11,16 @@ Select Menu Inventario de Industria
     Wait Until Screen Contain    relatorios_icon.png   10
     Key Down    ALT 
     # Clica em relatorios
-    Press Special Key    NUM3
+    Press Key    3
     Sleep    1
     # Clica em faturamento
-    Press Special Key    NUM2
+    Press Key    2
     Sleep    1
     # Clica em apuração
-    Press Special Key   NUM3
+    Press Key   3
     Sleep    1
     # Clica em inventario de industria
-    Press Special Key    NUM3
+    Press Key    3
     Sleep    1
     Key Up    ALT
     Sleep    3s
