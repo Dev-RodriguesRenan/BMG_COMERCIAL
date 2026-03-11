@@ -8,8 +8,8 @@ Resource        share.robot
 Login in FJ Frigo
     [Arguments]    ${base}
     Start App    ${FJ_PATH}
-    Sleep    5s 
-    Press Enter
+    Sleep    5s
+    Switch Window Login 
     Wait Until Screen Contain    fj_banner.png    60
     Sleep    5s    Aguarda para caso apareça a tela de update
     # Seleciona a base da FJ Frigo

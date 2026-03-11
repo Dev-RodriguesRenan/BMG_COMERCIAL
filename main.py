@@ -4,7 +4,6 @@ import time
 from dotenv import load_dotenv
 import subprocess
 import datetime
-import pyautogui
 import schedule
 from logger.logger import logger
 
@@ -76,9 +75,4 @@ if __name__ == "__main__":
                 f"{time.strftime('%X')} - Waiting for the next scheduled task...",
                 end="\r",
             )
-            try:
-                pyautogui.press("numlock")
-                print("press key numlock", end="\r")
-            except Exception as e:
-                print(e)
             time.sleep(1)

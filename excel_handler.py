@@ -14,7 +14,12 @@ BASE_DOCUMENTS = Path(
 BASE_CARNES = os.path.join(BASE_DOCUMENTS, "carnes")
 BASE_INVENTARIO_INDUSTRIA = os.path.join(BASE_DOCUMENTS, "inventario_industria")
 BASE_VENDAS_TRANSFERENCIA = os.path.join(BASE_DOCUMENTS, "vendas_transferencia")
-
+logger.debug(f"""
+Caminho para base documents: {BASE_DOCUMENTS}
+Caminho para base carnes: {BASE_CARNES}
+Caminho para base inventario: {BASE_INVENTARIO_INDUSTRIA}
+Caminho para base vendas: {BASE_VENDAS_TRANSFERENCIA}
+""")
 message = """
 <p>Segue o anexo do arquivo consolidado de {} gerado: </p>
 <p><b>{}</b></p>
@@ -34,15 +39,18 @@ if not os.path.exists(BASE_VENDAS_TRANSFERENCIA):
 for arquivo in os.listdir(BASE_DOCUMENTS):
     if arquivo.endswith(".xlsx"):
         src_path = os.path.join(BASE_DOCUMENTS, arquivo)
-        if "Inventario" in arquivo and "consolidado" not in arquivo:
+        if "inventario" in arquivo.lower() and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_INVENTARIO_INDUSTRIA, arquivo)
             shutil.move(src_path, dst_path)
-        if "VendaTransferencia" in arquivo and "consolidado" not in arquivo:
+            logger.debug(f"Arquivo {arquivo} movido para {dst_path}")
+        if "vendatransferencia" in arquivo.lower() and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_VENDAS_TRANSFERENCIA, arquivo)
             shutil.move(src_path, dst_path)
-        if "Carne" in arquivo and "consolidado" not in arquivo:
+            logger.debug(f"Arquivo {arquivo} movido para {dst_path}")
+        if "carne" in arquivo.lower() and "consolidado" not in arquivo:
             dst_path = os.path.join(BASE_CARNES, arquivo)
             shutil.move(src_path, dst_path)
+            logger.debug(f"Arquivo {arquivo} movido para {dst_path}")
 
 
 def merge_excel_files(folder_path: str):
@@ -58,6 +66,7 @@ def merge_excel_files(folder_path: str):
         all_data = pd.DataFrame()
         file = ""
         for file in os.listdir(folder_path):
+            logger.info(f"Analisando arquivo: {file}")
             if (
                 file.endswith(".xlsx")
                 and "consolidado" not in file

@@ -9,5 +9,7 @@ robotframework
 robotframework-sikulilibrary
 robotframework-robocop
 colorama
+ruff
+taskipy
 # shutil
 # smtplib
