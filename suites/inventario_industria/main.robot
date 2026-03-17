@@ -1,19 +1,31 @@
 *** Settings ***
-Resource        ../../keywords/inventario_industria/keywords.robot
-Test Setup        Load Images
-Test Teardown    Close Force
+Resource            ../../keywords/inventario_industria/keywords.robot
+
+Test Setup          Load Images
+Test Teardown       Close Force
+
+
 *** Variables ***
-@{BASES}    
-...    BMG Central
-...    Central Nostrobeef
+@{BASES}
+...         BMG Central
+...         Central Nostrobeef
 # ...    BMG VILA BELA
 # ...    BMG FOUR FRIGO
+
+
 *** Test Cases ***
 Inverntario de Industria
     FOR    ${base}    IN    @{BASES}
         TRY
             Log    \nExtraindo planilha INVENTARIO DE INDUSTRIA da base: ${base}\n    level=DEBUG    console=True
-            Login in FJ Frigo    ${base}
+            ${is_logged}    Login in FJ Frigo    ${base}
+            IF    not ${is_logged}
+                Log    \nErro ao logar o caso de teste em: ${base}\n    level=DEBUG    console=True
+                Screenshot    Erro_Login_Inventario_Industria_${base}
+                Close Force
+                CONTINUE
+            END
+
             Select Menu Inventario de Industria
             Fill Forms in Inventario de Industria
             Export XLSX in Inventario de Industria    ${base}

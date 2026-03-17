@@ -1,31 +1,42 @@
 *** Settings ***
-Library         SikuliLibrary
-Library         keywords.py
-Resource        share.robot
+Library     SikuliLibrary
+Library     keywords.py
+Resource    share.robot
+
 
 *** Keywords ***
-# Acessa o sistema da FJ Frigo 
+# Acessa o sistema da FJ Frigo
 Login in FJ Frigo
     [Arguments]    ${base}
-    Start App    ${FJ_PATH}
-    Sleep    5s
-    Switch Window Login 
-    Wait Until Screen Contain    fj_banner.png    60
-    Sleep    5s    Aguarda para caso apareça a tela de update
-    # Seleciona a base da FJ Frigo
-    Select Base in FJ Frigo    ${base}
-    Sleep    3s
-    # Preenche o login e senha
-    Fill Credentials in FJ Frigo
-    # Verifica se a janela de erros de atualização apareceu
-    Check If Updated Errors 
+    TRY
+        Start App    ${FJ_PATH}
+        Sleep    5s
+        Switch Window Login
+        Wait Until Screen Contain    fj_banner.png    60
+        Sleep    5s    Aguarda para caso apareça a tela de update
+        # Seleciona a base da FJ Frigo
+        Select Base in FJ Frigo    ${base}
+        Sleep    3s
+        # Preenche o login e senha
+        Fill Credentials in FJ Frigo
+        # Verifica se o usuario foi bloqueado
+        ${lock}    Check If Lock User
+        IF    ${lock}    RETURN    False
+        # Verifica se a janela de erros de atualização apareceu
+        Check If Updated Errors
+        RETURN    True
+    EXCEPT    AS    ${e}
+        Log    Erro ao logar: ${e}    console=True
+        RETURN    False
+    END
+
 Select Base in FJ Frigo
     [Arguments]    ${base}
     Click    banco_de_dados.png    91    08
-    Sleep    2s   
+    Sleep    2s
     IF    '${base}' == 'BMG Central'
         Select Primary Option
-        Select Option   1
+        Select Option    1
     ELSE IF    '${base}' == 'Central Nostrobeef'
         Select Primary Option
         Select Option    3
@@ -36,22 +47,23 @@ Select Base in FJ Frigo
         Select Primary Option
         Select Option    6
     ELSE
-       Log    Escolhendo a base default: BMG Central    console=True
+        Log    Escolhendo a base default: BMG Central    console=True
     END
     Press Enter
     Sleep    2s
     Press Special Key    TAB
+
 Fill Credentials in FJ Frigo
     Sleep    2s
     Press Special Key    TAB
     # verifica se o login e senha estão preenchidos
-    ${is_loged}=    Exists    login.png    5
+    ${is_loged}    Exists    login.png    5
     IF    '${is_loged}' == 'False'
         With Keys Write Text    ${LOGIN}
         Log    Preechendo login do usuario: ${LOGIN}    console=True
     END
     Press Special Key    TAB
-    ${is_loged}=    Exists    password.png    5
+    ${is_loged}    Exists    password.png    5
     IF    '${is_loged}' == 'False'
         Log    Preechendo senha do usuario: ${PASSWORD}    console=True
         Type With Modifiers    ${PASSWORD}
@@ -59,6 +71,7 @@ Fill Credentials in FJ Frigo
     Press Enter
     Press Enter
 # Salva o arquivo XLSX
+
 Save XLSX
     [Arguments]    ${nome_arquivo}
     # Verifica se o excel abriu
@@ -73,34 +86,40 @@ Save XLSX
     Sleep    2s
     Press Enter
     Wait Until Screen Contain    excel_is_opened.png    10
-    End Task    EXCEL.EXE    
+    Sleep    10s
+    End Task    EXCEL.EXE
 
 # Fecha o sistema da FJ Frigo
+
 Close FJ Frigo
-    Switch Window FjFrigo 
+    Switch Window FjFrigo
     Sleep    5s
     Alt F4
     Log    Sistema fechado!!    console=True
 # Fecha o sistema da FJ Frigo
-Close Force    
+
+Close Force
     Sleep    2
     Execute Kill
     Log    Sistema fechado!!    console=True
 # Seleciona a primeira opção de base
+
 Select Primary Option
     FOR    ${counter}    IN RANGE    0    6    1
-        Log    ${counter}    
+        Log    ${counter}
         Press Key    up
     END
 # Seleciona a opção desejada
+
 Select Option
     [Arguments]    ${option}
     FOR    ${counter}    IN RANGE    0    ${option}    1
-        Log    ${counter}    
+        Log    ${counter}
         Sleep    2s
         Press Key    down
     END
 # Procura o icone até que o mesmo seja encontrado
+
 Procurar Icone
     [Arguments]    ${icon}
     ${isCancel}    Exists    ${icon}.png    10
@@ -115,6 +134,9 @@ Procurar Icone
 
 Check If Updated Errors
     ${is_updated}    Exists    is_updated.png    7
-    IF    ${is_updated} == True
-        Press Enter
-    END
+    IF    ${is_updated} == True    Press Enter
+
+Check If Lock User
+    ${lock}    Exists    lock.png    7
+    IF    ${lock} == True    RETURN    True
+    RETURN    False

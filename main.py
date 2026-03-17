@@ -6,7 +6,7 @@ import subprocess
 import datetime
 import schedule
 from logger.logger import logger
-
+import pyautogui as pya
 load_dotenv()
 BASE_PATH = os.getenv("BASE_PATH", os.getcwd())
 
@@ -25,7 +25,6 @@ def run_file(file_path):
     logger.info(f"Running {file_path}")
     subprocess.run([python_path, "-m", "robot", "-d", "results", file_path])
     # garantindo que matou os processos java do robot e do fj
-    os.system("taskkill /f /im java*")
     logger.info(f"Finished running {file_path}")
 
 
@@ -36,6 +35,7 @@ def run_all_cases():
     logger.info("Running all cases!!")
     for file in files:
         run_file(file)
+    os.system("taskkill /f /im java*")
     logger.info("All cases finished running!!")
     logger.info("Running excel executor!!")
     subprocess.run([python_path, excel_executor_path])
@@ -55,9 +55,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == "--updater":
             run_file(updater_path)
-        elif sys.argv[1] == "--debug":
-            logger.debug("Debug mode activated. Running updater file.")
-            run_file(updater_path)
+        elif sys.argv[1] == "--debug" or '-d' in sys.argv[1]:
             logger.debug("Running file in debug mode!! awaiting 5 seconds")
             run_all_cases()
         else:
@@ -75,4 +73,9 @@ if __name__ == "__main__":
                 f"{time.strftime('%X')} - Waiting for the next scheduled task...",
                 end="\r",
             )
+            try:
+                pya.press('numlock')
+            except:
+                pass
+            print('NumLock press...')
             time.sleep(1)
