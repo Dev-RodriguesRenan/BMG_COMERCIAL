@@ -11,7 +11,7 @@ def press_keys_simultaneously(k1, k2):
 
 
 def with_keys_write_text(text):
-    pyautogui.write(text, interval=0.1)
+    pyautogui.typewrite(text, interval=0.1)
 
 
 def press_enter():
